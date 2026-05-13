@@ -21,10 +21,7 @@ export function rateLimit({ limit = 5, interval = 60 }) {
       return redis.call("INCR", KEYS[1])
     `
 
-    const result = await redis.eval(script, {
-      keys: [key],
-      args: [limit, interval],
-    })
+    const result = await redis.eval(script, [key], [limit, interval])
 
     return result !== 0
   }

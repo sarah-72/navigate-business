@@ -147,6 +147,25 @@ export async function POST(request) {
         )
       }
 
+      const workshopMetadata = {
+        type: 'workshop_registration',
+        workshopId: workshopReference,
+        userEmail,
+        userName: safeName,
+        ip,
+      }
+
+      if (isValidString(phone)) {
+        workshopMetadata.phone = phone.trim().slice(0, 32)
+      }
+
+      if (Array.isArray(selectedTopics) && selectedTopics.length > 0) {
+        workshopMetadata.selectedTopics = selectedTopics
+          .filter(Boolean)
+          .slice(0, 12)
+          .join(' | ')
+      }
+
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
         payment_method_types: ['card'],
@@ -169,17 +188,7 @@ export async function POST(request) {
           },
         ],
 
-        metadata: {
-          type: 'workshop_registration',
-          workshopId: workshopReference,
-          userEmail,
-          userName: safeName,
-          ip,
-          phone: isValidString(phone) ? phone.trim().slice(0, 32) : undefined,
-          selectedTopics: Array.isArray(selectedTopics)
-            ? selectedTopics.filter(Boolean).slice(0, 12).join(' | ')
-            : undefined,
-        },
+        metadata: workshopMetadata,
 
         success_url: `${baseUrl}/workshops/thank-you`,
         cancel_url: `${baseUrl}/workshops`,
