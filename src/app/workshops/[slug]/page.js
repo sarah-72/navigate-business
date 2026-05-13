@@ -1,4 +1,4 @@
-import WorkshopDetail from '@/components/sections/WorkshopDetail';
+import WorkshopDetail from '@/components/sections/WorkshopsDetails';
 import { notFound } from 'next/navigation';
 import { workshops } from '@/data/workshops';
 
