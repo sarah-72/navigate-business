@@ -1,0 +1,33 @@
+import Link from "next/link";
+
+/* METADATA */
+export const metadata = {
+  title: "Page Not Found | Navigate Business",
+  description:
+    "The page you're looking for doesn't exist. Head back to the Navigate Business homepage.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+export default function NotFound() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-(--muted)">
+      <div className="text-center">
+        <h1 className="mb-4 text-4xl font-bold text-(--foreground)">404</h1>
+
+        <p className="mb-4 text-xl text-(--muted-foreground)">
+          Oops! Page not found
+        </p>
+
+        <Link
+          href="/"
+          className="text-(--primary) underline hover:text-(--primary)/90"
+        >
+          Return to Home
+        </Link>
+      </div>
+    </div>
+  );
+}

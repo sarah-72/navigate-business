@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #2a2730;
+
+  --card: #ffffff;
+  --card-foreground: #2a2730;
+
+  --popover: #ffffff;
+  --popover-foreground: #2a2730;
+
+  --primary: #0f7a59; /*emerald-700*/
+  --primary-foreground: #ffffff;
+
+  --primary-bright: #3fd6a3; /*emerald-400*/
+
+  --secondary: #3f3b47;
+  --secondary-foreground: #ffffff;
+
+  --muted: #f2faf7; /*emerald-50*/
+  --muted-foreground: #64606b;
+
+  --accent: #e6fbf4; /*emerald-50*/
+  --accent-foreground: #0b5c42; /*emerald-100*/
+
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+
+  --border: #d4d2d9;
+  --input: #d4d2d9;
+  --ring: #0f7a59;
+
+  --radius: 0.75rem;
+
+  --sidebar-background: #fafafa;
+  --sidebar-foreground: #42424a;
+  --sidebar-primary: #1a1a1a;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #f4f4f5;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: #e6e8eb;
+  --sidebar-ring: #3b82f6;
+
+  --charcoal: #2a2834;
+  --charcoal-light: #44404d;
+  --mint: #22c58b; /*emerald-500*/
+  --mint-light: #e6fbf4; /*emerald-100*/
+  --mint-dark: #0b5c42; /*emerald-800*/
+}
+.bg-foreground-dots {
+  background-image: radial-gradient(circle at 1px 1px, #2a2730 1px, transparent 0);
+  background-size: 32px 32px;
+}
+/* =========================
+   BASE STYLES (NO @layer / NO @apply)
+   ========================= */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins), sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+ font-family: var(--font-poppins), sans-serif;
+  font-weight: 600;
+}
+
+/* Border utility replacement */
+/* :where(*) {
+  border-color: var(--border);
+} */
+/* =========================
+   CUSTOM UTILITIES (plain CSS)
+   ========================= */
+
+.text-gradient {
+  background: linear-gradient(to right, var(--primary), #34d399);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-padding {
+  padding: 4rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding: 5rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: 6rem 2rem;
+  }
+}
+.editorial-rule {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.editorial-rule::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
