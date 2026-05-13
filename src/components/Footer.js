@@ -30,13 +30,13 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <Image
-                src="/navigate-business.png"
+                src="/navigate-business-logo.png"
                 alt="Navigate Business"
                 width={40}
                 height={40}
               />
               <span className="font-bold text-lg text-(--secondary-foreground)">
-                Navigate <span className="text-(--primary)">Business</span>
+                Navigate <span className="text-(--primary-bright)">Business</span>
               </span>
             </div>
 

@@ -27,13 +27,13 @@ export default function FinalCTA() {
           >
             <h2 className="text-3xl sm:text-5xl text-(--secondary-foreground) mb-5 leading-[1.1] tracking-tight">
               <span className="font-normal">One conversation. </span>
-              <span className="italic tracking-[-0.01em] text-(--primary) font-normal">
+              <span className="italic tracking-[-0.01em] text-(--primary-bright) font-normal">
                 A clear next move
               </span>
               <span className="font-normal">.</span>
             </h2>
 
-            <p className="font-normal text-(--muted-foreground) text-xl sm:text-2xl mb-10 leading-snug">
+            <p className="font-normal text-(--secondary-foreground) text-xl sm:text-2xl mb-10 leading-snug">
               Tell us where you are. We&apos;ll tell you the honest next step.
             </p>
 

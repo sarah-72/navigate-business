@@ -133,7 +133,7 @@ export default function Contact() {
 
               <Link
                 href="/membership"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-(--primary) hover:gap-2 transition-all"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-(--primary-bright) hover:gap-2 transition-all"
               >
                 Ask about our membership options <ArrowRight size={14} />
               </Link>
