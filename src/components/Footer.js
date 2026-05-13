@@ -64,7 +64,7 @@ export default function Footer() {
 
           {/* CONTACT */}
           <div>
-            <h4 className="font-heading font-bold mb-4">Contact</h4>
+            <h4 className=" font-bold mb-4">Contact</h4>
             <ul className="space-y-2 text-sm text-(--secondary-foreground)/70">
               <li>
                 <a href="tel:+447398104144" className="hover:text-emerald-400 transition-colors">
