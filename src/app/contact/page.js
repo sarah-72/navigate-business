@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { sendContactFormEmail } from '@/app/actions/email'
+import { sendContactFormEmail } from '@/app/actions/emails'
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false)
