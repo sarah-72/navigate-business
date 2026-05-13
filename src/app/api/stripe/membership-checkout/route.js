@@ -5,8 +5,13 @@ import { getClientIp } from '@/lib/get-ip'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL
 
-if (!BASE_URL) {
-  throw new Error('Missing NEXT_PUBLIC_SITE_URL')
+function resolveBaseUrl(request) {
+  if (BASE_URL) return BASE_URL
+  try {
+    return new URL(request.url).origin
+  } catch {
+    return 'https://navigatebusiness.co.uk'
+  }
 }
 
 // -----------------------------
@@ -139,8 +144,8 @@ export async function POST(request) {
         ip, // useful for fraud tracking
       },
 
-      success_url: `${BASE_URL}/membership/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${BASE_URL}/membership`,
+      success_url: `${resolveBaseUrl(request)}/membership/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${resolveBaseUrl(request)}/membership`,
 
       expires_at: Math.floor(Date.now() / 1000) + 1800,
     })

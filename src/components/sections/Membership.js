@@ -201,13 +201,19 @@ export default function Membership() {
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        alert(data?.error || "Failed to create checkout session.");
+        return;
+      }
 
       if (data?.url) {
         window.location.href = data.url;
-      } else {
-        alert(data?.error || "Something went wrong");
+        return;
       }
+
+      alert(data?.error || "Failed to create checkout session.");
     } catch (error) {
       console.error(error);
       alert("Something went wrong. Please try again.");
@@ -306,13 +312,19 @@ export default function Membership() {
                         }),
                       });
 
-                      const data = await res.json();
+                      const data = await res.json().catch(() => null);
+
+                      if (!res.ok) {
+                        alert(data?.error || "Failed to create checkout session.");
+                        return;
+                      }
 
                       if (data?.url) {
                         window.location.href = data.url;
-                      } else {
-                        alert(data?.error || "Something went wrong");
+                        return;
                       }
+
+                      alert(data?.error || "Failed to create checkout session.");
                     } catch (error) {
                       console.error(error);
                       alert("Something went wrong. Please try again.");

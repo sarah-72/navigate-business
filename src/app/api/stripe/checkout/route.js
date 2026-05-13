@@ -6,11 +6,16 @@ import { getWorkshopBySlug } from '@/data/workshops'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL
 
-if (!BASE_URL) {
-  throw new Error('Missing NEXT_PUBLIC_SITE_URL')
-}
-
 const limiter = rateLimit({ limit: 5, interval: 60 * 1000 })
+
+function resolveBaseUrl(request) {
+  if (BASE_URL) return BASE_URL
+  try {
+    return new URL(request.url).origin
+  } catch {
+    return 'https://navigatebusiness.co.uk'
+  }
+}
 
 const WORKSHOPS = {
   'startup-day': { title: 'Start-Up in a Day', price: 10000 },
@@ -73,6 +78,8 @@ export async function POST(request) {
       ? userName.trim().slice(0, 80)
       : 'Guest'
 
+    const baseUrl = resolveBaseUrl(request)
+
     // =====================================================
     //  KICKSTART FLOW
     // =====================================================
@@ -106,8 +113,8 @@ export async function POST(request) {
           ip,
         },
 
-        success_url: `${BASE_URL}/membership/success?type=kickstart`,
-        cancel_url: `${BASE_URL}/membership`,
+        success_url: `${baseUrl}/membership/success?type=kickstart`,
+        cancel_url: `${baseUrl}/membership`,
       })
 
       return NextResponse.json({ url: session.url })
@@ -174,8 +181,8 @@ export async function POST(request) {
             : undefined,
         },
 
-        success_url: `${BASE_URL}/workshops/thank-you`,
-        cancel_url: `${BASE_URL}/workshops`,
+        success_url: `${baseUrl}/workshops/thank-you`,
+        cancel_url: `${baseUrl}/workshops`,
         expires_at: Math.floor(Date.now() / 1000) + 1800,
       })
 
@@ -235,8 +242,8 @@ export async function POST(request) {
           ip,
         },
 
-        success_url: `${BASE_URL}/membership/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${BASE_URL}/membership`,
+        success_url: `${baseUrl}/membership/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${baseUrl}/membership`,
         expires_at: Math.floor(Date.now() / 1000) + 1800,
       })
 
@@ -252,7 +259,9 @@ export async function POST(request) {
     console.error('Checkout error:', error)
 
     return NextResponse.json(
-      { error: 'Failed to create checkout session' },
+      {
+        error: error?.message ? `Checkout failed: ${error.message}` : 'Failed to create checkout session',
+      },
       { status: 500 }
     )
   }

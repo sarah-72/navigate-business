@@ -30,7 +30,11 @@ export default function WorkshopDetail({ workshop }) {
         }),
       })
 
-      const data = await response.json()
+      const data = await response.json().catch(() => null)
+
+      if (!response.ok) {
+        throw new Error(data?.error || 'Failed to create checkout session')
+      }
 
       if (data?.url) {
         window.location.href = data.url

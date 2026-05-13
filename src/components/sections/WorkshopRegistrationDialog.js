@@ -76,7 +76,11 @@ export default function WorkshopRegistrationDialog({
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null)
+
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to create checkout session")
+      }
 
       if (data?.url) {
         window.location.href = data.url;
