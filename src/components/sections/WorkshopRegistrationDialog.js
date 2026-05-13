@@ -1,73 +1,256 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import * as Dialog from "@radix-ui/react-dialog";
+import { X, Check, Clock, CalendarDays, Monitor } from "lucide-react";
 
-export default function WorkshopRegistrationDialog({ open, onOpenChange }) {
-  const [form, setForm] = useState({ name: "", email: "", phone: "" });
-  const [topics, setTopics] = useState([]);
+const workshopTopics = [
+  "Launch Your Business — Start-Up Essentials",
+  "Reimagine & Refresh — For Existing Businesses",
+  "Master Digital Marketing — Get Seen, Get Results",
+  "AI for Business — Work Smarter, Not Harder",
+  "Lead with Confidence — Leadership That Inspires",
+  "Own Your Time — Productivity & Time Management",
+  "Communicate to Connect — Business Communication",
+  "Content Made Simple — Create Without the Stress",
+  "Money Matters — Financial Planning & Budgeting",
+  "Close the Deal — Sales & Negotiation Skills",
+  "Social Media That Works — Strategy & Growth",
+  "Build a Brand People Remember",
+];
 
-  const workshopTopics = [
-    "Start a Business",
-    "Marketing Basics",
-    "AI for Business",
-    "Social Media Growth",
-  ];
+export default function WorkshopRegistrationDialog({
+  open,
+  onOpenChange,
+}) {
+  const [loading, setLoading] = useState(false);
 
-  const toggle = (t) => {
-    setTopics((prev) =>
-      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  const [selectedTopics, setSelectedTopics] = useState([]);
+
+  const toggleTopic = (topic) => {
+    setSelectedTopics((prev) =>
+      prev.includes(topic)
+        ? prev.filter((t) => t !== topic)
+        : [...prev, topic]
     );
   };
 
-  if (!open) return null;
+  const handleClose = () => {
+    setForm({ name: "", email: "", phone: "" });
+    setSelectedTopics([]);
+    onOpenChange(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (selectedTopics.length === 0) {
+      alert("Please select at least one workshop topic.");
+      return;
+    }
+
+    try {
+      if (!form.name.trim() || !form.email.includes("@")) {
+        alert("Please enter your name and a valid email address.")
+        return
+      }
+
+      setLoading(true);
+
+      const res = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "workshop",
+          userEmail: form.email,
+          userName: form.name,
+          phone: form.phone,
+          selectedTopics,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data?.url) {
+        window.location.href = data.url;
+        return
+      }
+
+      throw new Error(data?.error || "No checkout URL returned");
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white max-w-lg w-full rounded-xl p-6">
-        <h2 className="text-xl font-bold mb-4">Workshop Registration</h2>
+    <AnimatePresence>
+      {open && (
+        <Dialog.Root open={open} onOpenChange={(v) => !v && handleClose()}>
+          <Dialog.Portal forceMount>
 
-        <input
-          className="w-full border p-2 mb-3"
-          placeholder="Name"
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-        />
-
-        <input
-          className="w-full border p-2 mb-3"
-          placeholder="Email"
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-
-        <div className="mb-3">
-          {workshopTopics.map((t) => (
-            <label key={t} className="block text-sm">
-              <input
-                type="checkbox"
-                onChange={() => toggle(t)}
-                className="mr-2"
+            {/* OVERLAY */}
+            <Dialog.Overlay asChild>
+              <motion.div
+                className="fixed inset-0 z-40 bg-black/70"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
               />
-              {t}
-            </label>
-          ))}
-        </div>
+            </Dialog.Overlay>
 
-        <button
-          className="w-full bg-blue-600 text-white py-2 rounded"
-          onClick={() => {
-            alert("Registered!");
-            onOpenChange(false);
-          }}
-        >
-          Submit
-        </button>
+            {/* MODAL */}
+            <Dialog.Content asChild>
+              <motion.div
+                className="
+                  fixed left-1/2 top-1/2 z-50 w-[95vw] max-w-2xl
+                  -translate-x-1/2 -translate-y-1/2
+                  rounded-2xl bg-white p-6 shadow-xl
+                  max-h-[90vh] overflow-y-auto
+                "
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+              >
 
-        <button
-          className="w-full mt-2 text-sm text-gray-500"
-          onClick={() => onOpenChange(false)}
-        >
-          Close
-        </button>
-      </div>
-    </div>
+                {/* ACCESSIBILITY TITLE (REQUIRED) */}
+                <Dialog.Title className="sr-only">
+                  Workshop Registration
+                </Dialog.Title>
+
+                {/* CLOSE */}
+                <button
+                  onClick={handleClose}
+                  className="absolute right-4 top-4 p-2 rounded-full hover:bg-gray-100"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                {/* HEADER */}
+                <div className="mb-4">
+                  <h2 className="text-xl font-bold">
+                    Register for a Virtual Workshop
+                  </h2>
+
+                  <p className="text-sm text-gray-600 mt-1">
+                    1-day virtual workshop — £99.99 per workshop
+                  </p>
+
+                  <p className="text-xs text-gray-500 mt-1">
+                    ⚡ Limited spaces available per session
+                  </p>
+                </div>
+
+                {/* INFO */}
+                <div className="flex gap-4 text-xs text-gray-500 mb-4">
+                  <span className="flex items-center gap-1">
+                    <Monitor className="w-4 h-4" /> Online
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" /> 1 Day
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <CalendarDays className="w-4 h-4" /> Flexible Dates
+                  </span>
+                </div>
+
+                {/* FORM */}
+                <form onSubmit={handleSubmit} className="space-y-4">
+
+                  <input
+                    className="w-full border p-2 rounded"
+                    placeholder="Name"
+                    value={form.name}
+                    onChange={(e) =>
+                      setForm({ ...form, name: e.target.value })
+                    }
+                  />
+
+                  <input
+                    className="w-full border p-2 rounded"
+                    placeholder="Email"
+                    value={form.email}
+                    onChange={(e) =>
+                      setForm({ ...form, email: e.target.value })
+                    }
+                  />
+
+                  <input
+                    className="w-full border p-2 rounded"
+                    placeholder="Phone (optional)"
+                    value={form.phone}
+                    onChange={(e) =>
+                      setForm({ ...form, phone: e.target.value })
+                    }
+                  />
+
+                  {/* TOPICS */}
+                  <div>
+                    <p className="font-medium mb-2">
+                      Select workshop topics
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {workshopTopics.map((topic) => {
+                        const checked = selectedTopics.includes(topic);
+
+                        return (
+                          <div
+                            key={topic}
+                            onClick={() => toggleTopic(topic)}
+                            className={`flex items-center gap-2 p-2 border rounded cursor-pointer transition ${
+                              checked
+                                ? "bg-gray-100 border-gray-400"
+                                : ""
+                            }`}
+                          >
+                            <div className="w-4 h-4 border flex items-center justify-center">
+                              {checked && (
+                                <Check className="w-3 h-3" />
+                              )}
+                            </div>
+
+                            <span className="text-sm">{topic}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* FOOTER CTA (YOUR REQUESTED DESIGN) */}
+                  <p className="text-xs text-muted-foreground mb-3">Once registered, one of our team will be in touch to confirm upcoming dates and secure your place.</p>
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-bold text-secondary">£99.99 <span className="text-sm font-normal text-muted-foreground">per workshop</span></p>
+
+                  <div className="flex justify-end">
+  <button
+    type="submit"
+    disabled={loading}
+    className="bg-(--primary) text-white px-6 py-2 rounded-md font-medium hover:opacity-90 transition disabled:opacity-50"
+  >
+    {loading ? "Processing..." : "Register Now"}
+  </button>
+</div>
+
+                  </div>
+
+                </form>
+
+              </motion.div>
+            </Dialog.Content>
+
+          </Dialog.Portal>
+        </Dialog.Root>
+      )}
+    </AnimatePresence>
   );
 }

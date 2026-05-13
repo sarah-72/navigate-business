@@ -5,9 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, User, ArrowRight, CheckCircle } from 'lucide-react'
-import { loadStripe } from '@stripe/stripe-js'
-
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function WorkshopDetail({ workshop }) {
   const [isRegistering, setIsRegistering] = useState(false)
@@ -21,8 +18,6 @@ export default function WorkshopDetail({ workshop }) {
     setIsRegistering(true)
 
     try {
-      const stripe = await stripePromise
-
       const response = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: {
@@ -32,16 +27,17 @@ export default function WorkshopDetail({ workshop }) {
           workshopSlug: workshop.slug.current,
           userEmail: registrationData.email,
           userName: registrationData.name,
-          successUrl: `${window.location.origin}/workshops/${workshop.slug.current}/thank-you`,
-          cancelUrl: window.location.href,
         }),
       })
 
-      const { url } = await response.json()
+      const data = await response.json()
 
-      if (url) {
-        window.location.href = url
+      if (data?.url) {
+        window.location.href = data.url
+        return
       }
+
+      throw new Error(data?.error || 'Failed to create checkout session')
     } catch (error) {
       console.error('Registration error:', error)
       alert('There was an error processing your registration. Please try again.')

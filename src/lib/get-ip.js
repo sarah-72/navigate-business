@@ -11,5 +11,5 @@ export function getClientIp(request) {
   if (realIp) return realIp
 
   // fallback (not ideal but safe)
-  return 'unknown'
+  return null
 }

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
 import { rateLimit } from '@/lib/rate-limit'
 import { getClientIp } from '@/lib/get-ip'
+import { getWorkshopBySlug } from '@/data/workshops'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL
 
@@ -32,14 +33,7 @@ export async function POST(request) {
     // -----------------------------
     // IP + RATE LIMIT
     // -----------------------------
-    const ip = getClientIp(request)
-
-    if (!ip) {
-      return NextResponse.json(
-        { error: 'Unable to verify request origin' },
-        { status: 400 }
-      )
-    }
+    const ip = getClientIp(request) || '127.0.0.1'
 
     const allowed = await limiter(ip)
 
@@ -63,7 +57,7 @@ export async function POST(request) {
       )
     }
 
-    const { type, workshopId, tier, userEmail, userName } = body || {}
+    const { type, workshopId, workshopSlug, tier, userEmail, userName, selectedTopics, phone } = body || {}
 
     // -----------------------------
     // GLOBAL VALIDATION
@@ -122,15 +116,29 @@ export async function POST(request) {
     // =====================================================
     //  WORKSHOP FLOW
     // =====================================================
-    if (workshopId) {
-      if (!isValidString(workshopId) || !WORKSHOPS[workshopId]) {
+    if (type === 'workshop' || workshopId || workshopSlug) {
+      let workshop = null
+      let workshopReference = workshopId || workshopSlug || 'generic'
+
+      if (workshopSlug) {
+        workshop = getWorkshopBySlug(workshopSlug)
+      } else if (workshopId) {
+        workshop = WORKSHOPS[workshopId]
+      }
+
+      if (!workshop && type === 'workshop') {
+        workshop = {
+          title: 'Workshop registration',
+          price: 9999,
+        }
+      }
+
+      if (!workshop) {
         return NextResponse.json(
           { error: 'Invalid workshop selected' },
           { status: 400 }
         )
       }
-
-      const workshop = WORKSHOPS[workshopId]
 
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
@@ -156,10 +164,14 @@ export async function POST(request) {
 
         metadata: {
           type: 'workshop_registration',
-          workshopId,
+          workshopId: workshopReference,
           userEmail,
           userName: safeName,
           ip,
+          phone: isValidString(phone) ? phone.trim().slice(0, 32) : undefined,
+          selectedTopics: Array.isArray(selectedTopics)
+            ? selectedTopics.filter(Boolean).slice(0, 12).join(' | ')
+            : undefined,
         },
 
         success_url: `${BASE_URL}/workshops/thank-you`,

@@ -15,7 +15,7 @@ function Input(props) {
       {...props}
       className="
         w-full h-10 px-3 text-sm rounded-md
-        border border-(--border)
+        border border-[#d4d2d9]
         bg-transparent text-(--foreground)
         placeholder:text-(--muted-foreground)
         outline-none transition
@@ -35,7 +35,7 @@ function Checkbox({ checked, onChange }) {
       onClick={() => onChange(!checked)}
       className={`
         w-4 h-4 mt-1 flex items-center justify-center rounded-sm border
-        border-(--primary) transition
+        border-[#d4d2d9] transition
         ${checked ? "bg-(--primary) text-white" : "bg-transparent"}
       `}
     >
@@ -55,7 +55,7 @@ export default function NewsletterPopup() {
 
   useEffect(() => {
     if (localStorage.getItem(POPUP_KEY)) return;
-    const t = setTimeout(() => setShow(true), 10000);
+    const t = setTimeout(() => setShow(true), 5000);
     return () => clearTimeout(t);
   }, []);
 
@@ -107,7 +107,7 @@ export default function NewsletterPopup() {
         >
           <div className="
             relative rounded-xl overflow-hidden shadow-xl
-            border border-(--border)
+            border border-[#d4d2d9]
             bg-(--card)
           ">
 

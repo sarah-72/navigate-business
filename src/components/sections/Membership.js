@@ -45,7 +45,7 @@ const tiers = [
     ],
     cta: "Get Started",
     popular: false,
-    link: "/signup",
+    tierKey: "start",
   },
   {
     name: "Navigate Build",
@@ -60,7 +60,7 @@ const tiers = [
     ],
     cta: "Join Navigate Build",
     popular: true,
-    link: "/signup",
+    tierKey: "build",
   },
   {
     name: "Navigate Accelerate",
@@ -74,7 +74,7 @@ const tiers = [
     ],
     cta: "Enquire Now",
     popular: false,
-    link: "/contact",
+    tierKey: "accelerate",
   },
 ];
 
@@ -183,29 +183,34 @@ export default function Membership() {
             </ul>
            <Button
   onClick={async () => {
-    const userEmail = prompt("Enter your email to continue");
+    try {
+      const userEmail = prompt("Enter your email to continue");
 
-    if (!userEmail || !userEmail.includes("@")) {
-      alert("Please enter a valid email");
-      return;
-    }
+      if (!userEmail || !userEmail.includes("@")) {
+        alert("Please enter a valid email");
+        return;
+      }
 
-    const res = await fetch("/api/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: "kickstart",
-        userEmail,
-        userName: "Guest",
-      }),
-    });
+      const res = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "kickstart",
+          userEmail,
+          userName: "Guest",
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data?.url) {
-      window.location.href = data.url;
-    } else {
-      alert(data?.error || "Something went wrong");
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        alert(data?.error || "Something went wrong");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
     }
   }}
 >
@@ -274,18 +279,48 @@ export default function Membership() {
                   ))}
                 </ul>
 
-                <Link href={tier.link}>
-                  <Button
-                    size="lg"
-                    className={`w-full font-semibold gap-2 ${
-                      tier.popular
-                        ? ""
-                        : "bg-(--secondary) hover:bg-(--secondary)/90"
-                    }`}
-                  >
-                    {tier.cta} <ArrowRight className="w-4 h-4" />
-                  </Button>
-                </Link>
+                <Button
+                  size="lg"
+                  className={`w-full font-semibold gap-2 ${
+                    tier.popular
+                      ? ""
+                      : "bg-(--secondary) hover:bg-(--secondary)/90"
+                  }`}
+                  onClick={async () => {
+                    try {
+                      const userEmail = prompt("Enter your email to continue");
+
+                      if (!userEmail || !userEmail.includes("@")) {
+                        alert("Please enter a valid email");
+                        return;
+                      }
+
+                      const res = await fetch("/api/stripe/checkout", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          type: "membership",
+                          tier: tier.tierKey,
+                          userEmail,
+                          userName: "Guest",
+                        }),
+                      });
+
+                      const data = await res.json();
+
+                      if (data?.url) {
+                        window.location.href = data.url;
+                      } else {
+                        alert(data?.error || "Something went wrong");
+                      }
+                    } catch (error) {
+                      console.error(error);
+                      alert("Something went wrong. Please try again.");
+                    }
+                  }}
+                >
+                  {tier.cta} <ArrowRight className="w-4 h-4" />
+                </Button>
               </div>
             </div>
           ))}

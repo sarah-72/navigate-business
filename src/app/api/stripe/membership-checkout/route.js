@@ -45,14 +45,7 @@ export async function POST(request) {
     // -----------------------------
     // IP CHECK (FALLBACK SAFE)
     // -----------------------------
-    const ip = getClientIp(request)
-
-    if (!ip) {
-      return NextResponse.json(
-        { error: 'Unable to verify request origin' },
-        { status: 400 }
-      )
-    }
+    const ip = getClientIp(request) || '127.0.0.1'
 
     // -----------------------------
     // RATE LIMIT CHECK
@@ -154,7 +147,6 @@ export async function POST(request) {
 
     return NextResponse.json(
       {
-        sessionId: session.id,
         url: session.url,
       },
       {

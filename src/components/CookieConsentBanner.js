@@ -1,62 +1,40 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, Mail } from "lucide-react";
+import { X, Cookie } from "lucide-react";
 import Link from "next/link";
 
-const KEY = "navigate_newsletter_shown";
+const CONSENT_KEY = "navigate_cookie_consent";
 
-export default function NewsletterPopup() {
-  console.log("COOKIE BANNER MOUNTED");
+export default function CookieConsentBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    let hasScrolled = false;
-    let timerTriggered = false;
-
-    const shown = localStorage.getItem(KEY);
-    if (shown) return;
-
-    // 1. Time delay (10–15s)
-    const timer = setTimeout(() => {
-      timerTriggered = true;
-      maybeShow();
-    }, 12000);
-
-    // 2. Scroll detection
-    const onScroll = () => {
-      const scrollPercent =
-        (window.scrollY + window.innerHeight) /
-        document.documentElement.scrollHeight;
-
-      if (scrollPercent > 0.45) {
-        hasScrolled = true;
-        maybeShow();
-      }
-    };
-
-    function maybeShow() {
-      if (timerTriggered && hasScrolled) {
-        setVisible(true);
-        localStorage.setItem(KEY, "true");
-        window.removeEventListener("scroll", onScroll);
-      }
+    const consent = localStorage.getItem(CONSENT_KEY);
+    if (!consent) {
+      // Show banner after a short delay
+      const timer = setTimeout(() => setVisible(true), 1000);
+      return () => clearTimeout(timer);
     }
-
-    window.addEventListener("scroll", onScroll);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("scroll", onScroll);
-    };
   }, []);
+
+  const acceptCookies = () => {
+    localStorage.setItem(CONSENT_KEY, "accepted");
+    setVisible(false);
+    // Reload to enable analytics
+    window.location.reload();
+  };
+
+  const rejectCookies = () => {
+    localStorage.setItem(CONSENT_KEY, "rejected");
+    setVisible(false);
+  };
 
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 left-4 sm:left-auto z-50 sm:max-w-xs">
+    <div className="fixed bottom-4 right-4 left-4 sm:left-auto z-50 sm:max-w-md">
       <div className="relative rounded-xl border border-(--border) bg-(--card) shadow-xl overflow-hidden">
-
         <button
           onClick={() => setVisible(false)}
           className="absolute top-2 right-2 text-muted-foreground"
@@ -65,35 +43,41 @@ export default function NewsletterPopup() {
         </button>
 
         <div className="bg-(--accent) px-4 py-3 flex items-center gap-2">
-          <Mail className="w-4 h-4 text-(--primary)" />
+          <Cookie className="w-4 h-4 text-(--primary)" />
           <div>
-            <p className="text-sm font-semibold">Stay in the Loop</p>
+            <p className="text-sm font-semibold">Cookie Preferences</p>
             <p className="text-xs text-muted-foreground">
-              Tips, updates & opportunities
+              We use cookies to improve your experience
             </p>
           </div>
         </div>
 
         <div className="p-4 space-y-3">
-
           <p className="text-xs text-muted-foreground">
-            Get practical business insights from real-world mentoring experience.
+            This website uses cookies to enhance your browsing experience and provide analytics.
           </p>
 
+          <div className="flex gap-2">
+            <button
+              onClick={acceptCookies}
+              className="flex-1 h-9 bg-(--primary) text-white rounded-md text-sm"
+            >
+              Accept All
+            </button>
+            <button
+              onClick={rejectCookies}
+              className="flex-1 h-9 border border-(--border) text-(--foreground) rounded-md text-sm hover:bg-(--accent)"
+            >
+              Reject All
+            </button>
+          </div>
+
           <Link
-            href="/newsletter"
-            className="block w-full text-center h-9 bg-(--primary) text-white rounded-md text-sm leading-9"
+            href="/cookie-policy"
+            className="block text-xs text-(--primary) hover:underline"
           >
-            Join Free Updates
+            Learn more about our cookie policy
           </Link>
-
-          <button
-            onClick={() => setVisible(false)}
-            className="w-full text-xs text-muted-foreground hover:text-foreground"
-          >
-            No thanks
-          </button>
-
         </div>
       </div>
     </div>
