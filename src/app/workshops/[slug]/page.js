@@ -1,20 +1,22 @@
-import WorkshopDetail from '@/components/WorkshopDetail'
-import { notFound } from 'next/navigation'
-import { workshops } from '@/data/workshops'
+import WorkshopDetail from "@/components/sections/WorkshopDetail";
+import { notFound } from "next/navigation";
+import { workshops } from "@/app/data/workshops";
 
 export function generateStaticParams() {
   return workshops.map((workshop) => ({
-    slug: workshop.slug,
-  }))
+    slug: workshop.slug.current,
+  }));
 }
 
 export function generateMetadata({ params }) {
-  const workshop = workshops.find((w) => w.slug === params.slug)
+  const workshop = workshops.find(
+    (w) => w.slug.current === params.slug
+  );
 
   if (!workshop) {
     return {
-      title: 'Workshop Not Found',
-    }
+      title: "Workshop Not Found",
+    };
   }
 
   return {
@@ -24,15 +26,17 @@ export function generateMetadata({ params }) {
       title: workshop.title,
       description: workshop.description,
     },
-  }
+  };
 }
 
 export default function WorkshopPage({ params }) {
-  const workshop = workshops.find((w) => w.slug === params.slug)
+  const workshop = workshops.find(
+    (w) => w.slug.current === params.slug
+  );
 
   if (!workshop) {
-    notFound()
+    notFound();
   }
 
-  return <WorkshopDetail workshop={workshop} />
+  return <WorkshopDetail workshop={workshop} />;
 }
