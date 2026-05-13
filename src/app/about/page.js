@@ -42,7 +42,7 @@ export const metadata = {
   },
 };
 
-export default function Page() {
+export default function AboutPage() {
   return (
     <>
       <DetailedAbout />
