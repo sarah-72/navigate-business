@@ -1,6 +1,6 @@
-import WorkshopDetail from "@/components/sections/WorkshopDetail";
-import { notFound } from "next/navigation";
-import { workshops } from "@/app/data/workshops";
+import WorkshopDetail from '@/components/sections/WorkshopDetail';
+import { notFound } from 'next/navigation';
+import { workshops } from '@/data/workshops';
 
 export function generateStaticParams() {
   return workshops.map((workshop) => ({
