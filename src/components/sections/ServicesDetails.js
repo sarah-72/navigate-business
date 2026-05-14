@@ -103,7 +103,7 @@ export default function ServicesDetails() {
           title={
             <>
               From idea to income with{" "}
-              <span className="italic text-(--primary)">clarity</span>.
+              <span className="italic text-(--primary-bright)">clarity</span>.
             </>
           }
           intro="Business support for individuals and organisations who need clear direction, practical structure, and real progress — not just advice."
@@ -114,7 +114,7 @@ export default function ServicesDetails() {
           <div className="container mx-auto max-w-4xl text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
               <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-(--primary)/10 border border-(--primary)/30 text-(--primary) text-[11px] font-bold uppercase">
-                <Sparkles size={14} /> Our approach
+                <Sparkles size={14} /> The Navigate Way
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-bold text-(--foreground) mb-6">
@@ -291,13 +291,13 @@ export default function ServicesDetails() {
         
         {/* LEFT CONTENT */}
         <div>
-          <div className="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full bg-(--primary)/15 border border-(--primary)/40 text-(--primary) text-[11px] font-bold tracking-[0.2em] uppercase">
+          <div className="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full bg-(--primary-bright)/15 border border-emerald-400/40 text-(--primary-bright) text-[11px] font-bold tracking-[0.2em] uppercase">
             Optional ongoing support
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-(--secondary-foreground) mb-5 leading-tight">
             Membership from{" "}
-            <span className="italic text-(--primary)">
+            <span className="italic text-(--primary-bright)">
               £49/month
             </span>
           </h2>
@@ -336,7 +336,7 @@ export default function ServicesDetails() {
               key={item}
               className="flex items-start gap-3 text-(--secondary-foreground)"
             >
-              <span className="shrink-0 mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-(--primary)/20 text-(--primary)">
+              <span className="shrink-0 mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-(--primary)/30 text-(--primary-bright)">
                 <Check className="w-4 h-4" strokeWidth={3} />
               </span>
               <span className="text-base sm:text-lg font-light">
@@ -437,14 +437,14 @@ export default function ServicesDetails() {
       viewport={{ once: true }}
     >
       {/* Label */}
-      <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-(--primary)/15 border border-(--primary)/40 text-(--primary) text-[11px] font-bold tracking-[0.22em] uppercase">
+      <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-(--primary-bright)/15 border border-emerald-400/50 text-(--primary-bright) text-[11px] font-bold tracking-[0.22em] uppercase">
         Work with us
       </div>
 
       {/* Heading */}
       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-(--secondary-foreground) mb-5 leading-tight">
         Not sure where you fit?{" "}
-        <span className="italic text-(--primary)">
+        <span className="italic text-(--primary-bright)">
           We&apos;ll help you decide.
         </span>
       </h2>

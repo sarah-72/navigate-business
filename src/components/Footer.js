@@ -6,10 +6,12 @@ import { FaLinkedinIn, FaInstagram, FaFacebookF } from "react-icons/fa";
 
 const footerLinks = [
   { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
+  { label: "Start Here", href: "/start-here" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
   { label: "Partnerships", href: "/partnerships" },
-  { label: "Workshops", href: "#workshops" },
+  { label: "Workshops", href: "/workshops" },
+  { label: "Membership", href: "/membership" },
   { label: "Contact", href: "#contact" },
 ];
 

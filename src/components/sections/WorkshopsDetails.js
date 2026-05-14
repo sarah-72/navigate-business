@@ -88,7 +88,7 @@ export default function WorkshopsDetails() {
           title={
             <>
               Practical 1-day workshops.{" "}
-              <span className="italic text-(--primary)">No fluff.</span>
+              <span className="italic text-(--primary-bright)">No fluff.</span>
             </>
           }
           intro="Live, virtual, small group. Built for owners who’d rather leave with a working plan than a pile of notes."

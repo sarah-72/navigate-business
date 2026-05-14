@@ -57,10 +57,10 @@ export default function About() {
 
               <ul className="space-y-2.5">
                 {[
-                  "Member of the Association of Business Mentors",
-                  "Worked on government-backed programmes like Help to Grow",
                   "30+ years of real-world business experience",
-                  "Trusted by individuals, start-ups, councils, and national programmes across the UK",
+                "Help to Grow Business Mentor & Enterprise Trainer",
+                "Member of the Association of Business Mentors",
+                "Experience supporting delivery across start-ups, SMEs, DWP-funded, and national enterprise programmes",
                 ].map((item) => (
                   <li
                     key={item}

@@ -1,6 +1,6 @@
 import HeroSection from '@/components/sections/HeroSection';
 import StartHereSection from '@/components/sections/StartHereSection';
-// import DualAudienceSection from '@/components/sections/DualAudienceSection';
+import DualAudienceSection from '@/components/sections/DualAudienceSection';
 import HowWeWork from '@/components/sections/HowWeWork';
 // import EcosystemSection from '@/components/sections/EcosystemSection';
 // import ServicesOverview from '@/components/sections/ServicesOverview';
@@ -22,7 +22,7 @@ export default function Home() {
     <main>
       <HeroSection />
       <StartHereSection />
-      {/* <DualAudienceSection /> */}
+      <DualAudienceSection />
       <HowWeWork />
       {/* <EcosystemSection /> */}
       {/* <ServicesOverview /> */}

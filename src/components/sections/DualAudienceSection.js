@@ -122,7 +122,7 @@ export default function DualAudienceSection() {
                   href="/start-here"
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-(--primary) px-5 py-2.5 text-sm font-semibold text-(--primary-foreground) hover:bg-(--mint-dark) transition-colors"
                 >
-                  Start Here <ArrowRight size={16} />
+                  Begin Your Journey <ArrowRight size={16} />
                 </Link>
 
                 <a
@@ -192,14 +192,14 @@ export default function DualAudienceSection() {
                   href="#partnerships"
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-(--primary) px-5 py-2.5 text-sm font-semibold text-(--primary-foreground) hover:bg-(--mint-dark) transition-colors"
                 >
-                  Speak to Our Delivery Team <ArrowRight size={16} />
+                  Let&apos;s Talk Delivery <ArrowRight size={16} />
                 </a>
 
                 <Link
                   href="/partnerships"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-emerald-700 px-5 py-2.5 text-sm font-semibold text-emerald-700 hover:bg-emerald-700 hover:text-white transition-colors"
                 >
-                  Start a Partnership
+                  Explore Partnership
                 </Link>
               </div>
             </div>

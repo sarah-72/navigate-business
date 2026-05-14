@@ -55,7 +55,7 @@ export default function StartHerePage() {
           title={
             <>
               See how we think —{" "}
-              <span className="italic text-primary">before you commit</span>.
+              <span className="italic text-(--primary-bright)">before you commit</span>.
             </>
           }
           intro="A free guide and a free live training. The fastest way to feel the difference in how Navigate works."

@@ -54,7 +54,7 @@ export default function MembershipPage() {
           title={
             <>
               Ongoing support —{" "}
-              <span className="italic text-(--primary)">
+              <span className="italic text-(--primary-bright)">
                 stay as long as it works
               </span>
               .

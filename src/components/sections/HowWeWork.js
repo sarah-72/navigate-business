@@ -31,11 +31,12 @@ const offers = [
     icon: Compass,
     title: "Foundational clarity.",
     description:
-      "Where the business is, where it needs to be, and the first 90 days of focused action.",
+      "A deep dive to understand where you are now, what challenges you're facing, and what needs attention first. Leave with a practical 60-day action plan to help you move forward with clarity and momentum.",
     outcomes: [
-      "Honest diagnostic of where you are",
-      "90-day plan with the right priorities",
-      "Clear definition of what success looks like",
+       "Honest conversation about where the business really is",
+      "Support to untangle challenges and priorities",
+      "A focused 60-day action plan with SMART goals",
+      "Clear next steps designed around real progress",
     ],
     cta: "Begin with Kickstart",
     highlight: false,
@@ -46,15 +47,15 @@ const offers = [
     price: "£275",
     priceNote: "per session",
     icon: Zap,
-    title: "High-intensity decision support.",
+      title: "Business Breakthrough Session.",
     description:
-      "Bring the hard calls — pricing, hiring, scaling. One session, decision made.",
+      "A focused business mentoring session to help you work through barriers, make confident decisions, and leave with a practical plan of action.",
     outcomes: [
-      "A specific decision made — not deferred",
-      "Reasoning you can defend",
-      "A move you can take this week",
+      "Honest strategic feedback",
+      "Clear next steps and priorities",
+      "Focused support to help you move things forward quickly",
     ],
-    cta: "Book a Power Session",
+    cta: "Book Your Session",
     highlight: true,
   },
 ];
@@ -86,13 +87,13 @@ export default function HowWeWork() {
           <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-(--primary)/10 border border-(--primary)/20 text-(--primary) text-[11px] font-bold tracking-[0.22em] uppercase">
             <Sparkles className="w-3.5 h-3.5" /> How we work
           </div>
-
+ 
           <h2 className="text-3xl sm:text-5xl font-light text-(--foreground) mb-5 leading-[1.05] tracking-tight">
             Two ways to <span className="italic text-(--primary)">get unstuck</span> — fast.
           </h2>
 
           <p className="text-(--muted-foreground) text-base sm:text-lg font-light leading-relaxed">
-            No long programmes. No bloated retainers. Direct, senior-level mentoring designed to move your business forward this month — not next year.
+             Real-world support built around what your business actually needs.
           </p>
         </motion.div>
 

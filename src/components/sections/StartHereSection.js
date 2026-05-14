@@ -69,6 +69,9 @@ export default function StartHereSection() {
             >
               <Download size={16} /> Download the guide
             </a>
+             <p className="text-xs text-(--muted-foreground) text-center mt-3">
+            Start at your own pace. No pressure.
+          </p>
           </motion.div>
 
           {/* Free Training */}
@@ -117,6 +120,9 @@ export default function StartHereSection() {
             >
               <PlayCircle size={16} /> Watch the training
             </Link>
+             <p className="text-xs text-white/60 text-center mt-3">
+            Perfect if you prefer to see the bigger picture first.
+          </p>
           </motion.div>
         </div>
 

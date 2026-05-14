@@ -5,25 +5,25 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "I'd been going round in circles for months trying to get my cake business off the ground. Sarah sat me down, helped me price properly and sort my socials — within six weeks I had my first wholesale order. She doesn't just talk, she rolls her sleeves up with you.",
+    quote: "I'd been sitting on the idea for nearly two years. Too scared to price it, too scared to launch. After Kickstart I had a proper 90-day plan, my pricing made sense, and six weeks later I landed my first wholesale order with a local farm shop. I genuinely don't think I'd have a business without that first conversation with Sarah.",
     name: "Gemma P.",
     role: "Founder, Sweet Box Bakery",
     initials: "GP",
-    highlight: "First wholesale order in 6 weeks",
+    metric: "1st wholesale order · 6 weeks",
   },
   {
-    quote: "I was on Universal Credit with a dream of starting a cleaning business but no idea where to begin. Sarah helped me put together a proper business plan, get my pricing right, and gave me the confidence to actually go for it. Twelve months on I'm off benefits, employing two staff, and just signed my first commercial contract.",
+    quote: "A year ago I was on Universal Credit, cleaning a couple of houses cash-in-hand and feeling like I was going backwards. Sarah didn't sugar-coat anything — she told me exactly what to fix and what to stop wasting energy on. Today I'm off benefits, two staff on the books, and I've just signed my first commercial contract with a property management firm.",
     name: "Rachel D.",
     role: "Owner, Sparkle Commercial Cleaning",
     initials: "RD",
-    highlight: "Off benefits & employing 2 staff",
+    metric: "Off benefits · 2 hires · commercial contract",
   },
   {
-    quote: "After redundancy I had no idea where to start. I was full of self-doubt and overthinking everything. Navigate helped me see what I already had — skills, experience, contacts I'd forgotten about. Nine months on, I'm fully booked as a freelance project manager and earning more than my old salary.",
+    quote: "I got made redundant at 47 and had no idea what to do. One Power Session and I left with three actual decisions made — pricing, niche, and how to position myself. I stopped second-guessing everything. Nine months later I'm fully booked through to next quarter and turning work away.",
     name: "Joanne K.",
     role: "Freelance Project Manager",
     initials: "JK",
-    highlight: "Fully booked within 9 months",
+    metric: "Fully booked · 9 months",
   },
 ];
 
@@ -69,7 +69,7 @@ export default function Testimonials() {
               <Quote size={28} className="text-(--primary)/30 mb-3" />
 
               <span className="inline-block mb-3 px-3 py-1 rounded-full bg-(--accent) text-(--primary) text-xs font-semibold w-fit">
-                {t.highlight}
+                {t.metric}
               </span>
 
               <p className="text-(--foreground) leading-relaxed mb-6 flex-1 italic">
