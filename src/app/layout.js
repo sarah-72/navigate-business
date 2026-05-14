@@ -44,6 +44,16 @@ export const metadata = {
     "Staffordshire business mentor",
   ],
 
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon.ico" }
+    ],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
+  },
+
   openGraph: {
     title: "Navigate Business",
     description:
@@ -73,7 +83,7 @@ export const metadata = {
     index: true,
     follow: true,
   },
-}
+};
 
 export default async function RootLayout({ children }) {  
   const cookieStore = await cookies();
