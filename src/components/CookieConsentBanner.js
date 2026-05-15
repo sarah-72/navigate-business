@@ -37,6 +37,7 @@ export default function CookieConsentBanner() {
       <div className="relative rounded-xl border border-(--border) bg-(--card) shadow-xl overflow-hidden">
         <button
           onClick={() => setVisible(false)}
+          aria-label="Close cookie preferences"
           className="absolute top-2 right-2 text-muted-foreground"
         >
           <X size={16} />

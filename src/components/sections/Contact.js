@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail, Phone, Send, MessageSquare, ArrowRight } from "lucide-react";
+import { sendContactFormEmail } from "@/app/actions/emails";
 
 const enquiryTypes = [
   "Starting a business",
@@ -23,10 +24,30 @@ export default function Contact() {
     message: "",
   });
 
-  const handleSubmit = (e) => {
+  const [pending, startTransition] = useTransition();
+  const [state, setState] = useState({
+    success: false,
+    error: null,
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Thank you for your enquiry! We'll be in touch soon.");
-    setForm({ name: "", email: "", phone: "", type: "", message: "" });
+
+    startTransition(async () => {
+      const formData = new FormData();
+      formData.append('name', form.name);
+      formData.append('email', form.email);
+      formData.append('phone', form.phone);
+      formData.append('type', form.type);
+      formData.append('message', form.message);
+
+      const res = await sendContactFormEmail(null, formData);
+      setState(res);
+
+      if (res.success) {
+        setForm({ name: "", email: "", phone: "", type: "", message: "" });
+      }
+    });
   };
 
   return (
@@ -149,6 +170,18 @@ export default function Contact() {
             className="lg:col-span-3 rounded-2xl bg-(--card) border border-(--border) p-8 space-y-5"
           >
 
+            {state.success && (
+              <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-lg">
+                Thank you for your enquiry! We'll be in touch soon.
+              </div>
+            )}
+
+            {state.error && (
+              <div className="bg-red-50 border border-red-200 text-red-800 p-4 rounded-lg">
+                {state.error}
+              </div>
+            )}
+
             {/* Name + Email */}
             <div className="grid sm:grid-cols-2 gap-5">
               <input
@@ -186,22 +219,26 @@ export default function Contact() {
                 className="w-full rounded-lg border border-(--input) bg-(--background) px-4 py-3 text-sm text-(--foreground) placeholder:text-(--muted-foreground)"
               />
 
-              <select
-                required
-                value={form.type}
-                onChange={(e) =>
-                  setForm({ ...form, type: e.target.value })
-                }
-                className="w-full rounded-lg border border-(--input) bg-(--background) px-4 py-3 text-sm text-(--foreground)"
-              >
-                <option value="">What do you need support with?</option>
+              <div>
+                <label htmlFor="support-type" className="sr-only">
+                  What do you need support with?
+                </label>
+                <select
+                  id="support-type"
+                  required
+                  value={form.type}
+                  onChange={(e) =>
+                    setForm({ ...form, type: e.target.value })
+                  }
+                  className="w-full rounded-lg border border-(--input) bg-(--background) px-4 py-3 text-sm text-(--foreground)"
+                >
+                  <option value="">What do you need support with?</option>
                 {enquiryTypes.map((t) => (
                   <option key={t} value={t}>
                     {t}
                   </option>
                 ))}
-              </select>
-            </div>
+              </select>              </div>            </div>
 
             {/* Message */}
             <textarea
@@ -224,9 +261,10 @@ export default function Contact() {
             <div>
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-(--primary) px-7 py-3.5 text-base font-semibold text-(--primary-foreground) hover:bg-(--primary)/90 transition-colors w-full sm:w-auto"
+                disabled={pending}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-(--primary) px-7 py-3.5 text-base font-semibold text-(--primary-foreground) hover:bg-(--primary)/90 transition-colors w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Start the Conversation <Send size={16} />
+                {pending ? "Sending..." : "Start the Conversation"} <Send size={16} />
               </button>
 
               <p className="text-xs text-(--muted-foreground) mt-2">

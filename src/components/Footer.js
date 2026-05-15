@@ -17,10 +17,10 @@ const footerLinks = [
 
 export default function Footer() {
   const socials = [
-    { icon: FaLinkedinIn, href: "#" },
-    { icon: FaInstagram, href: "#" },
-    { icon: FaFacebookF, href: "#" },
-  ];
+  { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/sarah-g-997598223?utm_source=share_via&utm_content=profile&utm_medium=member_ios", label: "LinkedIn" },
+  { icon: FaInstagram, href: "https://www.instagram.com/navigatebusinesssupport?igsh=bGIxZ3B1YmRxcWV1&utm_source=qr", label: "Instagram" },
+  { icon: FaFacebookF, href: "https://www.facebook.com/share/14cFXuYvFBM/?mibextid=wwXIfr", label: "Facebook" },
+];
 
   return (
     <footer className="bg-(--secondary) text-(--secondary-foreground)">
@@ -42,7 +42,7 @@ export default function Footer() {
               </span>
             </div>
 
-            <p className="text-(--secondary-foreground)/70 text-sm leading-relaxed">
+            <p className="text-(--secondary-foreground)/90 text-sm leading-relaxed">
               Turning ambition into action. We equip founders, teams and organisations with the strategy, skills and support to build businesses that actually grow — no jargon, no fluff, just results.
             </p>
           </div>
@@ -55,7 +55,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <a
                     href={l.href}
-                    className="text-sm text-(--secondary-foreground)/70 hover:text-emerald-400 transition-colors"
+                    className="text-sm text-(--secondary-foreground)/80 hover:text-emerald-400 transition-colors"
                   >
                     {l.label}
                   </a>
@@ -67,7 +67,7 @@ export default function Footer() {
           {/* CONTACT */}
           <div>
             <h4 className=" font-bold mb-4">Contact</h4>
-            <ul className="space-y-2 text-sm text-(--secondary-foreground)/70">
+            <ul className="space-y-2 text-sm text-(--secondary-foreground)/80">
               <li>
                 <a href="tel:+447398104144" className="hover:text-emerald-400 transition-colors">
                   07398 104144
@@ -78,10 +78,10 @@ export default function Footer() {
                   href="mailto:enterprise@navigatebusiness.co.uk"
                   className="hover:text-emerald-400 transition-colors break-all"
                 >
-                  enterprise@navigatebusiness.co.uk
+                  sarah@navigatebusiness.co.uk
                 </a>
               </li>
-              <li className="text-xs text-(--secondary-foreground)/50 pt-1">
+              <li className="text-xs text-(--secondary-foreground) pt-1">
                 Supporting businesses throughout the UK
               </li>
             </ul>
@@ -98,7 +98,8 @@ export default function Footer() {
                   <a
                     key={i}
                     href={s.href}
-                    className="w-10 h-10 rounded-lg bg-(--secondary-foreground)/10 flex items-center justify-center text-(--secondary-foreground)/70 hover:bg-emerald-400 hover:text-white transition-colors"
+                    aria-label={`Visit our ${s.label || s.href} page`}
+                    className="w-10 h-10 rounded-lg bg-(--secondary-foreground,rgba(0,0,0,0.1)) flex items-center justify-center text-(--secondary-foreground,rgba(0,0,0,0.8)) hover:bg-emerald-400 hover:text-white transition-colors"
                   >
                     <Icon size={18} />
                   </a>

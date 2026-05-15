@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Download, PlayCircle, FileText, Video } from "lucide-react";
-import Link from "next/link";
+// import Link from "next/link";
 
 export default function StartHereSection() {
   return (
@@ -114,12 +114,14 @@ export default function StartHereSection() {
               </li>
             </ul>
 
-            <Link
-              href="/webinar"
-              className="inline-flex items-center justify-center gap-2 w-full rounded-lg bg-(--primary) px-6 py-3 text-sm font-semibold text-(--primary-foreground) hover:opacity-90 transition-colors"
-            >
-              <PlayCircle size={16} /> Watch the training
-            </Link>
+          <a
+  href="https://us05web.zoom.us/j/5812207904?pwd=TnlpakpXUGlpeEN0TGtiU0VvenorUT09&omn=88969306016"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center justify-center gap-2 w-full rounded-lg bg-(--primary) px-6 py-3 text-sm font-semibold text-(--primary-foreground) hover:opacity-90 transition-colors"
+>
+  <PlayCircle size={16} /> Watch the training
+</a>
              <p className="text-xs text-white/60 text-center mt-3">
             Perfect if you prefer to see the bigger picture first.
           </p>

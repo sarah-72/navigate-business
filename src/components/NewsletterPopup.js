@@ -114,6 +114,7 @@ export default function NewsletterPopup() {
             {/* CLOSE */}
             <button
               onClick={close}
+              aria-label="Close newsletter popup"
               className="absolute top-2 right-2 text-(--muted-foreground) hover:text-(--foreground)"
             >
               <X size={16} />

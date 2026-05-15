@@ -1,52 +1,44 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { sendContactFormEmail } from '@/app/actions/emails'
 
+function SubmitButton({ pending }) {
+  return (
+    <button type="submit" className="btn-primary w-full" disabled={pending}>
+      {pending ? 'Sending...' : 'Send Message'}
+    </button>
+  )
+}
+
 export default function ContactPage() {
-  const [loading, setLoading] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
+  const [pending, startTransition] = useTransition()
+  const [state, setState] = useState({
+    success: false,
+    error: null,
+  })
 
   async function handleSubmit(formData) {
-    setLoading(true)
-
-    try {
-      await sendContactFormEmail(formData)
-      setSubmitted(true)
-    } catch (err) {
-      console.error(err)
-      alert('Something went wrong. Please try again.')
-    } finally {
-      setLoading(false)
-    }
+    startTransition(async () => {
+      const res = await sendContactFormEmail(null, formData)
+      setState(res)
+    })
   }
 
   return (
     <main>
-      {/* HERO (UNCHANGED) */}
-      <section className="container-section bg-linear-to-br from-white to-gray-50 pt-20 md:pt-28">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-charcoal mb-6">
-            Get in Touch
-          </h1>
-          <p className="text-xl text-charcoal/80">
-            Ready to book a call, ask a question, or discuss a partnership? We&apos;d love to hear from you.
-          </p>
-        </div>
-      </section>
 
-      {/* FORM */}
       <section className="container-section bg-white">
         <div className="max-w-2xl mx-auto">
 
-          {submitted ? (
-            <div className="bg-green-50 border border-green-200 text-green-800 rounded-xl p-6">
-              Thank you — we&apos;ll reply within 24 hours.
+          {state.success ? (
+            <div className="bg-green-50 border border-green-200 text-green-800 p-6 rounded-xl">
+              Thank you — we’ll reply within 24 hours.
             </div>
           ) : (
             <form action={handleSubmit} className="space-y-6">
 
-              {/* HONEYPOT (hidden spam trap) */}
+              {/* Honeypot */}
               <input type="text" name="company" className="hidden" />
 
               <input name="name" placeholder="Name" required className="input" />
@@ -63,22 +55,24 @@ export default function ContactPage() {
               <textarea
                 name="message"
                 placeholder="Message"
-                required
                 rows={6}
+                required
                 className="input"
               />
 
-              <button
-                disabled={loading}
-                className="btn-primary w-full disabled:opacity-50"
-              >
-                {loading ? 'Sending...' : 'Send Message'}
-              </button>
+              <SubmitButton pending={pending} />
+
+              {state.error && (
+                <p className="text-red-600 text-sm">
+                  {state.error}
+                </p>
+              )}
             </form>
           )}
 
         </div>
       </section>
+
     </main>
   )
 }
