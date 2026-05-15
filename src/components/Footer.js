@@ -99,7 +99,7 @@ export default function Footer() {
                     key={i}
                     href={s.href}
                     aria-label={`Visit our ${s.label || s.href} page`}
-                    className="w-10 h-10 rounded-lg bg-(--secondary-foreground,rgba(0,0,0,0.1)) flex items-center justify-center text-(--secondary-foreground,rgba(0,0,0,0.8)) hover:bg-emerald-400 hover:text-white transition-colors"
+                    className="w-10 h-10 rounded-lg bg-(--secondary-foreground)/10 flex items-center justify-center text-(--secondary-foreground,rgba(0,0,0,0.8)) hover:bg-emerald-400 hover:text-white transition-colors"
                   >
                     <Icon size={18} />
                   </a>
