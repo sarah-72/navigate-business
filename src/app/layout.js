@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Poppins } from "next/font/google";
 import Analytics from "@/components/Analytics";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
 import NewsletterPopup from "@/components/NewsletterPopup";
 const poppins = Poppins({
@@ -87,6 +87,8 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {  
   const cookieStore = await cookies();
+  const headersList = await headers();
+  const nonce = headersList.get('X-Nonce') || '';
 
   const consent = cookieStore.get("navigate_cookie_consent")?.value;
   return (
@@ -99,6 +101,14 @@ export default async function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://navigatebusiness.co.uk" />
+        {/* Expose nonce to client components via window.__NONCE__ */}
+        <script
+          nonce={nonce}
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `window.__NONCE__ = '${nonce}';`,
+          }}
+        />
       </head>
       <body className="bg-white text-(--charcoal) font-sans min-h-full flex flex-col">
        
