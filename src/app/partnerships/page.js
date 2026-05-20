@@ -1,5 +1,6 @@
 import PartnershipsDetails from '@/components/sections/PartnershipsDetails'
 import BackToTop from '@/components/sections/BackToTop'
+import { getSiteSettings } from '@/lib/content-loader'
 
 export const metadata = {
   title: "Partnerships & Programme Delivery | Navigate Business",
@@ -36,9 +37,11 @@ export const metadata = {
 }
 
 export default function Page() {
+  const settings = getSiteSettings()
+
   return (
     <>
-      <PartnershipsDetails />
+      <PartnershipsDetails settings={settings} />
       <BackToTop />
     </>
   )

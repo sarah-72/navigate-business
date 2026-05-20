@@ -171,12 +171,12 @@ export default function WorkshopDetail({ workshop }) {
       </section>
 
       {/* Workshop Image */}
-      {workshop.image && (
+      {((workshop.image && workshop.image.asset?.url) || workshop.imageUrl) && (
         <section className="py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <Image
-                src={workshop.image.asset.url}
+                src={workshop.image?.asset?.url || workshop.imageUrl}
                 alt={workshop.title}
                 width={800}
                 height={400}
@@ -192,13 +192,17 @@ export default function WorkshopDetail({ workshop }) {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto prose prose-lg">
-              {workshop.content.map((block, index) => (
-                <div key={index} className="mb-6">
-                  {block.children?.map((child, childIndex) => (
-                    <span key={childIndex}>{child.text}</span>
-                  ))}
-                </div>
-              ))}
+              {Array.isArray(workshop.content) ? (
+                workshop.content.map((block, index) => (
+                  <div key={index} className="mb-6">
+                    {block.children?.map((child, childIndex) => (
+                      <span key={childIndex}>{child.text}</span>
+                    ))}
+                  </div>
+                ))
+              ) : (
+                <p>{workshop.content}</p>
+              )}
             </div>
           </div>
         </section>

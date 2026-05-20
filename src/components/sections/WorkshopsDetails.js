@@ -19,8 +19,14 @@ import Header from "@/components/Header";
 import PageHero from "@/components/sections/PageHero";
 import WorkshopRegistrationDialog from "@/components/sections/WorkshopRegistrationDialog";
 
+const iconMap = {
+  "Start-Up in a Day": Sparkles,
+  "AI for Small Business": Cpu,
+  "Content That Converts": MessageSquare,
+  "Leadership for Small Teams": Users,
+};
 
-const workshops = [
+const defaultWorkshops = [
   {
     icon: Sparkles,
     title: "Start-Up in a Day",
@@ -75,8 +81,21 @@ const workshops = [
   },
 ];
 
-export default function WorkshopsDetails() {
+function formatPrice(price) {
+  const amount = Number(price)
+  if (Number.isNaN(amount)) {
+    return price || 'TBA'
+  }
+
+  return new Intl.NumberFormat('en-GB', {
+    style: 'currency',
+    currency: 'GBP',
+  }).format(amount / 100)
+}
+
+export default function WorkshopsDetails({ workshops = [] }) {
   const [open, setOpen] = useState(false);
+  const workshopList = workshops.length > 0 ? workshops : defaultWorkshops;
 
   return (
     <>
@@ -87,7 +106,7 @@ export default function WorkshopsDetails() {
           eyebrow="Workshops"
           title={
             <>
-              Practical 1-day workshops.{" "}
+              Practical 1-day workshops.{' '}
               <span className="italic text-(--primary-bright)">No fluff.</span>
             </>
           }
@@ -97,15 +116,15 @@ export default function WorkshopsDetails() {
         {/* IMAGE STRIP */}
         <section className="bg-(--background)">
           <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 -mt-12 relative z-10">
-           <div className="relative w-full h-64 sm:h-80">
-  <Image
-    src="/navigate-business-enterprise-workshop.webp"
-    alt="Navigate Business workshop in session"
-    fill
-    className="object-cover"
-    priority
-  />
-</div>
+            <div className="relative w-full h-64 sm:h-80">
+              <Image
+                src="/navigate-business-enterprise-workshop.webp"
+                alt="Navigate Business workshop in session"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
           </div>
         </section>
 
@@ -117,7 +136,7 @@ export default function WorkshopsDetails() {
                 Upcoming workshops
               </div>
               <h2 className="font-display text-3xl sm:text-4xl font-light text-(--foreground) leading-[1.1] tracking-tight">
-                Pick the day that{" "}
+                Pick the day that{' '}
                 <span className="italic text-(--primary)">
                   moves you forward
                 </span>
@@ -126,8 +145,9 @@ export default function WorkshopsDetails() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              {workshops.map((w, i) => {
-                const Icon = w.icon;
+              {workshopList.map((w, i) => {
+                const Icon = w.icon || iconMap[w.title] || Sparkles
+                const priceLabel = w.price ? formatPrice(w.price) : 'TBA'
 
                 return (
                   <motion.div
@@ -136,7 +156,7 @@ export default function WorkshopsDetails() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 }}
-                    whileHover={{ y: -4 }} // 👈 subtle hover animation
+                    whileHover={{ y: -4 }}
                     className="rounded-2xl border border-(--border) bg-(--card) p-7 hover:border-(--primary)/40 hover:shadow-lg transition-all flex flex-col"
                   >
                     <div className="flex items-start justify-between mb-5">
@@ -144,7 +164,7 @@ export default function WorkshopsDetails() {
                         <Icon size={20} />
                       </div>
                       <span className="font-heading text-2xl font-bold text-(--foreground)">
-                        {w.price}
+                        {priceLabel}
                       </span>
                     </div>
 
@@ -161,7 +181,7 @@ export default function WorkshopsDetails() {
                     </p>
 
                     <ul className="space-y-2 mb-6">
-                      {w.bullets.map((b) => (
+                      {(w.bullets || []).map((b) => (
                         <li
                           key={b}
                           className="flex items-start gap-2.5 text-sm text-(--foreground)"
@@ -180,7 +200,7 @@ export default function WorkshopsDetails() {
                       <ArrowRight size={16} />
                     </button>
                   </motion.div>
-                );
+                )
               })}
             </div>
           </div>
@@ -195,7 +215,7 @@ export default function WorkshopsDetails() {
               </div>
 
               <h2 className="font-display text-3xl sm:text-4xl font-light text-(--foreground) leading-[1.1] tracking-tight">
-                Built to be{" "}
+                Built to be{' '}
                 <span className="italic text-(--primary)">
                   used, not stored
                 </span>
@@ -254,5 +274,5 @@ export default function WorkshopsDetails() {
       </main>
 
     </>
-  );
+  )
 }

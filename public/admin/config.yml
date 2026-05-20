@@ -1,61 +1,109 @@
-backend:
-  name: github
-  repo: sarah-72/navigate-business
-  branch: main
+# backend:
+#   name: github
+#   repo: sarah-72/navigate-business
+#   branch: main
 
-local_backend: true
+# media_folder: "public/uploads"
+# public_path: "/uploads"
 
-media_folder: "public/uploads"
-public_path: "/uploads"
+# collections:
+#   - name: "pages"
+#     label: "Pages"
+#     delete: false
+#     files:
+#       - label: "Home Page"
+#         name: "home"
+#         file: "src/content/pages/home.md"
+#         fields:
+#           - { label: "Title", name: "title", widget: "string" }
+#           - { label: "Description", name: "description", widget: "text" }
+#           - { label: "Content", name: "body", widget: "markdown" }
+#           - { label: "SEO Title", name: "seoTitle", widget: "string", required: false }
+#           - { label: "SEO Keywords", name: "seoKeywords", widget: "string", required: false }
 
-collections:
-  - name: "pages"
-    label: "Pages"
-    folder: "src/content/pages"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "SEO Title", name: "seoTitle", widget: "string", required: false }
-      - { label: "SEO Keywords", name: "seoKeywords", widget: "string", required: false }
+#       - label: "About Page"
+#         name: "about"
+#         file: "src/content/pages/about.md"
+#         fields:
+#           - { label: "Title", name: "title", widget: "string" }
+#           - { label: "Description", name: "description", widget: "text" }
+#           - { label: "Content", name: "body", widget: "markdown" }
 
-  - name: "testimonials"
-    label: "Testimonials"
-    folder: "src/content/testimonials"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Role", name: "role", widget: "string" }
-      - { label: "Quote", name: "quote", widget: "text" }
-      - { label: "Rating", name: "rating", widget: "number", min: 1, max: 5 }
+#       - label: "Contact Page"
+#         name: "contact"
+#         file: "src/content/pages/contact.md"
+#         fields:
+#           - { label: "Title", name: "title", widget: "string" }
+#           - { label: "Description", name: "description", widget: "text" }
+#           - { label: "Content", name: "body", widget: "markdown" }
 
-  - name: "services"
-    label: "Services"
-    folder: "src/content/services"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Icon", name: "icon", widget: "string" }
-      - { label: "Category", name: "category", widget: "select", options: ["individual", "organisation"] }
+#   - name: "workshops"
+#     label: "Workshops"
+#     folder: "src/content/workshops"
+#     create: false
+#     delete: false
+#     slug: "{{slug}}"
+#     fields:
+#       - { label: "Title", name: "title", widget: "string" }
+#       - { label: "Slug", name: "slug", widget: "string" }
+#       - { label: "Description", name: "description", widget: "text" }
+#       - { label: "Price (pence)", name: "price", widget: "number" }
+#       - { label: "Start Date", name: "startDate", widget: "datetime" }
+#       - { label: "Duration", name: "duration", widget: "string" }
+#       - { label: "Speaker", name: "speaker", widget: "string" }
+#       - { label: "Image URL", name: "imageUrl", widget: "image" }
+#       - { label: "Content", name: "content", widget: "markdown" }
 
-  - name: "settings"
-    label: "Settings"
-    folder: "src/content/settings"
-    create: false
-    delete: false
-    slug: "{{slug}}"
-    fields:
-      - { label: "Site Title", name: "siteTitle", widget: "string" }
-      - { label: "Site Description", name: "siteDescription", widget: "text" }
-      - { label: "Contact Email", name: "contactEmail", widget: "string" }
-      - { label: "Contact Phone", name: "contactPhone", widget: "string" }
-      - { label: "Address", name: "address", widget: "text" }
+#   - name: "webinarLinks"
+#     label: "Webinar Links"
+#     folder: "src/content/webinar-links"
+#     create: false
+#     delete: false
+#     slug: "{{slug}}"
+#     fields:
+#       - { label: "Title", name: "title", widget: "string" }
+#       - { label: "URL", name: "url", widget: "string" }
+#       - { label: "Description", name: "description", widget: "text" }
+#       - { label: "External", name: "external", widget: "boolean", default: false }
 
-site_url: https://navigatebusiness.co.uk
-logo_url: /navigate-business-logo.png
+#   - name: "testimonials"
+#     label: "Testimonials"
+#     folder: "src/content/testimonials"
+#     create: false
+#     delete: false
+#     slug: "{{slug}}"
+#     fields:
+#       - { label: "Name", name: "name", widget: "string" }
+#       - { label: "Role", name: "role", widget: "string" }
+#       - { label: "Quote", name: "quote", widget: "text" }
+#       - { label: "Rating", name: "rating", widget: "number", min: 1, max: 5 }
+
+#   - name: "services"
+#     label: "Services"
+#     folder: "src/content/services"
+#     create: false
+#     delete: false
+#     slug: "{{slug}}"
+#     fields:
+#       - { label: "Title", name: "title", widget: "string" }
+#       - { label: "Description", name: "description", widget: "text" }
+#       - { label: "Icon", name: "icon", widget: "string" }
+#       - { label: "Category", name: "category", widget: "select", options: ["individual", "organisation"] }
+
+#   - name: "settings"
+#     label: "Settings"
+#     delete: false
+#     files:
+#       - label: "Site Settings"
+#         name: "site-settings"
+#         file: "src/content/settings/site-settings.md"
+#         fields:
+#           - { label: "Site Title", name: "siteTitle", widget: "string" }
+#           - { label: "Site Description", name: "siteDescription", widget: "text" }
+#           - { label: "Contact Email", name: "contactEmail", widget: "string" }
+#           - { label: "Contact Phone", name: "contactPhone", widget: "string" }
+#           - { label: "Capability Statement URL", name: "capabilityStatementUrl", widget: "file" }
+#           - { label: "Address", name: "address", widget: "text" }
+
+# site_url: https://navigatebusiness.co.uk
+# logo_url: /navigate-business-logo.png

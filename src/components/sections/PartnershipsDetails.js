@@ -52,7 +52,9 @@ const whoWeWorkWith = [
   "Organisations delivering enterprise and employability programmes",
 ];
 
-export default function PartnershipsDetails() {
+export default function PartnershipsDetails({ settings = {} }) {
+  const capabilityStatementUrl = settings.capabilityStatementUrl || '/navigate-capability-statement.pdf'
+
   return (
     <>
       <Header />
@@ -102,7 +104,7 @@ export default function PartnershipsDetails() {
                   Partner With Us <ArrowRight size={18} />
                 </a>
 
-                <a href="/navigate-capability-statement.pdf" target="_blank" rel="noopener noreferrer"
+                <a href={capabilityStatementUrl} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-(--primary) px-7 py-3.5 text-(--primary)">
                   <Download size={18} /> Capability Statement
                 </a>

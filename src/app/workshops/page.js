@@ -1,5 +1,6 @@
 import WorkshopsDetails from '@/components/sections/WorkshopsDetails'
 import BackToTop from '@/components/sections/BackToTop'
+import { getAllWorkshops } from '@/data/workshops'
 
 export const metadata = {
   title: 'Business Workshops UK | 1-Day Practical Training for Entrepreneurs',
@@ -37,12 +38,14 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Business Workshops UK | Navigate Business',
     description:
-      'Practical 1-day workshops covering AI, start-ups, content, and leadership for UK entrepreneurs.',
+      'Practical 1-day workshops covering AI, start-ups, content marketing, and leadership for UK entrepreneurs.',
     images: ['/og/workshops.jpg'],
   },
 }
 
 export default function WorkshopsPage() {
+  const workshops = getAllWorkshops()
+
   const jsonLdCourse = {
     '@context': 'https://schema.org',
     '@type': 'Course',
@@ -111,7 +114,7 @@ export default function WorkshopsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQ) }}
       />
 
-      <WorkshopsDetails />
+      <WorkshopsDetails workshops={workshops} />
       <BackToTop />
     </>
   )
