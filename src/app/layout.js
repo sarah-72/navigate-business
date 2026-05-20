@@ -11,19 +11,6 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-poppins",
 });
-// import { DM_Sans, Outfit } from "next/font/google";
-
-// const dmSans = DM_Sans({
-//   subsets: ["latin"],
-//   variable: "--font-body",
-//   display: "swap",
-// });
-
-// const outfit = Outfit({
-//   subsets: ["latin"],
-//   variable: "--font-heading",
-//   display: "swap",
-// });
 
 export const metadata = {
   metadataBase: new URL('https://navigatebusiness.co.uk'),
@@ -98,9 +85,6 @@ export default async function RootLayout({ children }) {
       data-scroll-behavior="smooth"
     >
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://navigatebusiness.co.uk" />
         {/* Expose nonce to client components via window.__NONCE__ */}
         <script
           nonce={nonce}
