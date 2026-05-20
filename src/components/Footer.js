@@ -75,7 +75,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:enterprise@navigatebusiness.co.uk"
+                  href="mailto:sarah@navigatebusiness.co.uk"
                   className="hover:text-emerald-400 transition-colors break-all"
                 >
                   sarah@navigatebusiness.co.uk
