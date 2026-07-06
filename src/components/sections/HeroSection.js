@@ -30,7 +30,7 @@ export default function HeroSection() {
           className="max-w-3xl"
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 mb-7 px-4 py-1.5 rounded-full bg-(--primary-bright/15) border border-(--secondary-foreground)/70 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 mb-7 px-4 py-1.5 rounded-full bg-(--primary-bright)/15 border border-emerald-400/70 backdrop-blur-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-(--primary-bright)" />
             <span className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-(--primary-bright)">
               Business Mentoring &amp; Enterprise Delivery
@@ -51,7 +51,7 @@ export default function HeroSection() {
 
           {/* Description */}
           <p className="text-base sm:text-lg text-(--secondary-foreground)/90 mb-3 max-w-xl leading-relaxed font-light">
-            Straight-talking support to help you start, grow, or get things properly moving again.
+            Business support should fit around people, not the other way around. Whether you&apos;re launching your first idea, growing an established business or delivering enterprise programmes, Navigate Business combines real business experience with flexible, modern ways of working that get results.
           </p>
           <p className="text-sm sm:text-base mb-10 max-w-xl leading-relaxed font-light italic text-(--primary-bright)">
             No jargon. Just clear direction and results that move you forward.

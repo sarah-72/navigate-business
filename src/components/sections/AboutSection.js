@@ -32,7 +32,7 @@ export default function About() {
 
               <div className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-xl border-4 border-white relative">
                 <Image
-                  src="/sarah-grocott.png"
+                  src="/sarah-grocott-new.png"
                   alt="Sarah Grocott — Founder, Navigate Business"
                   fill
                   className="object-cover"

@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -17,7 +17,7 @@ const footerLinks = [
 
 export default function Footer() {
   const socials = [
-  { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/sarah-g-997598223?utm_source=share_via&utm_content=profile&utm_medium=member_ios", label: "LinkedIn" },
+  { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/sarah-grocott", label: "LinkedIn" },
   { icon: FaInstagram, href: "https://www.instagram.com/navigatebusinesssupport?igsh=bGIxZ3B1YmRxcWV1&utm_source=qr", label: "Instagram" },
   { icon: FaFacebookF, href: "https://www.facebook.com/share/14cFXuYvFBM/?mibextid=wwXIfr", label: "Facebook" },
 ];
@@ -98,7 +98,7 @@ export default function Footer() {
                   <a
                     key={i}
                     href={s.href}
-                    aria-label={`Visit our ${s.label || s.href} page`}
+                    aria-label={`Visit our ${s.label} page`}
                     className="w-10 h-10 rounded-lg bg-(--secondary-foreground)/10 flex items-center justify-center text-(--secondary-foreground,rgba(0,0,0,0.8)) hover:bg-emerald-400 hover:text-white transition-colors"
                   >
                     <Icon size={18} />

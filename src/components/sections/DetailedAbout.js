@@ -158,7 +158,7 @@ export default function DetailedAbout() {
           <div className="absolute -inset-6 rounded-full bg-linear-to-br from-emerald-700/30 to-emerald-800/20 blur-2xl -z-10" aria-hidden="true" />
           <div className="w-72 h-72 sm:w-80 sm:h-80 rounded-full overflow-hidden shadow-xl border-4 border-white">
             <Image
-              src="/sarah-grocott.png"
+              src="/sarah-grocott-new.png"
               alt="Sarah Grocott - Founder of Navigate Business"
               className="w-full h-full object-cover"
               loading="lazy"

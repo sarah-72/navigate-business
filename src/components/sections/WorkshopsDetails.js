@@ -107,10 +107,10 @@ export default function WorkshopsDetails({ workshops = [] }) {
           title={
             <>
               Practical 1-day workshops.{' '}
-              <span className="italic text-(--primary-bright)">No fluff.</span>
+              <span className="italic text-(--primary-bright)">Built for action.</span>
             </>
           }
-          intro="Live, virtual, small group. Built for owners who’d rather leave with a working plan than a pile of notes."
+          intro="Interactive workshops that combine real world mentoring, practical business tools, AI and hands on learning. Every session is designed so you leave with clarity, confidence and actions you can use immediately."
         />
 
         {/* IMAGE STRIP */}

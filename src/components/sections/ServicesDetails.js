@@ -102,11 +102,11 @@ export default function ServicesDetails() {
           eyebrow="Services"
           title={
             <>
-              From idea to income with{" "}
-              <span className="italic text-(--primary-bright)">clarity</span>.
+              Everything you need to move your business forward,{" "}
+              <span className="italic text-(--primary-bright)">all in one ecosystem</span>.
             </>
           }
-          intro="Business support for individuals and organisations who need clear direction, practical structure, and real progress — not just advice."
+          intro="A people first business ecosystem combining mentoring, training, workshops, digital tools, AI and flexible delivery to help individuals, organisations and communities move forward with confidence."
         />
 
         {/* -------- CORE -------- */}
