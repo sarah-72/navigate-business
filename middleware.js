@@ -20,11 +20,14 @@ export function middleware(request) {
   response.headers.set('X-Content-Type-Options', 'nosniff')
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
-
+response.headers.set(
+  'Strict-Transport-Security',
+  'max-age=63072000; includeSubDomains; preload'
+)
 
   const cspDirectives = [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' https://js.stripe.com https://*.stripe.com https://cdn.jsdelivr.net`,
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://js.stripe.com https://*.stripe.com https://cdn.jsdelivr.net`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "img-src 'self' data: https: blob:",
     "font-src 'self' data: https://fonts.gstatic.com",
@@ -39,7 +42,7 @@ export function middleware(request) {
 
 
   response.headers.set(
-    'Content-Security-Policy-Report-Only',
+    'Content-Security-Policy',
     cspDirectives
   )
 
