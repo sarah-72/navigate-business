@@ -125,15 +125,14 @@ export async function POST(request) {
     // =====================================================
     if (type === 'workshop' || workshopId || workshopSlug) {
       let workshop = null
+      const isGenericWorkshop = type === 'workshop' && !workshopId && !workshopSlug
       let workshopReference = workshopId || workshopSlug || 'generic'
 
       if (workshopSlug) {
         workshop = getWorkshopBySlug(workshopSlug)
       } else if (workshopId) {
         workshop = WORKSHOPS[workshopId]
-      }
-
-      if (!workshop && type === 'workshop') {
+      } else if (isGenericWorkshop) {
         workshop = {
           title: 'Workshop registration',
           price: 9999,

@@ -122,6 +122,9 @@ export default function WorkshopRegistrationDialog({
                 <Dialog.Title className="sr-only">
                   Workshop Registration
                 </Dialog.Title>
+                <Dialog.Description className="sr-only">
+                  Complete the registration form to book a workshop place.
+                </Dialog.Description>
 
                 {/* CLOSE */}
                 <button
