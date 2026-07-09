@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/button";
 import Link from "next/link";
+import MembershipRegistrationDialog from "@/components/sections/MembershipRegistrationDialog";
 
 import {
   Users,
@@ -85,8 +86,11 @@ const whoFor = [
   "Existing businesses wanting to reset, refocus and grow",
 ];
 
+
 export default function Membership() {
-  const [workshopOpen, setWorkshopOpen] = useState(false);
+const [workshopOpen, setWorkshopOpen] = useState(false);
+const [membershipOpen, setMembershipOpen] = useState(false);
+const [selectedTier, setSelectedTier] = useState(null);
 
   return (
     <motion.section
@@ -213,54 +217,21 @@ export default function Membership() {
                   ))}
                 </ul>
 
-                <Button
-                  size="lg"
-                  className={`w-full font-semibold gap-2 ${
-                    tier.popular
-                      ? ""
-                      : "bg-(--secondary) hover:bg-(--secondary)/90"
-                  }`}
-                  onClick={async () => {
-                    try {
-                      const userEmail = prompt("Enter your email to continue");
-
-                      if (!userEmail || !userEmail.includes("@")) {
-                        alert("Please enter a valid email");
-                        return;
-                      }
-
-                      const res = await fetch("/api/stripe/checkout", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          type: "membership",
-                          tier: tier.tierKey,
-                          userEmail,
-                          userName: "Guest",
-                        }),
-                      });
-
-                      const data = await res.json().catch(() => null);
-
-                      if (!res.ok) {
-                        alert(data?.error || "Failed to create checkout session.");
-                        return;
-                      }
-
-                      if (data?.url) {
-                        window.location.href = data.url;
-                        return;
-                      }
-
-                      alert(data?.error || "Failed to create checkout session.");
-                    } catch (error) {
-                      console.error(error);
-                      alert("Something went wrong. Please try again.");
-                    }
-                  }}
-                >
-                  {tier.cta} <ArrowRight className="w-4 h-4" />
-                </Button>
+              <Button
+  size="lg"
+  className={`w-full font-semibold gap-2 ${
+    tier.popular
+      ? ""
+      : "bg-(--secondary) hover:bg-(--secondary)/90"
+  }`}
+  onClick={() => {
+    setSelectedTier(tier);
+    setMembershipOpen(true);
+  }}
+>
+  {tier.cta}
+  <ArrowRight className="w-4 h-4" />
+</Button>
               </div>
             </div>
           ))}
@@ -469,10 +440,16 @@ export default function Membership() {
           </Button>
         </div>
 
-        <WorkshopRegistrationDialog
-          open={workshopOpen}
-          onOpenChange={setWorkshopOpen}
-        />
+     <WorkshopRegistrationDialog
+  open={workshopOpen}
+  onOpenChange={setWorkshopOpen}
+/>
+
+<MembershipRegistrationDialog
+  open={membershipOpen}
+  onOpenChange={setMembershipOpen}
+  tier={selectedTier}
+/>
       </div>
     </motion.section>
   );
