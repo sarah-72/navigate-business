@@ -60,7 +60,7 @@ export default function MembershipPage() {
               .
             </>
           }
-          intro="Three flexible tiers. No contracts. The structure, accountability and community most owners are missing."
+          intro="Business isn't always busy, and support shouldn't be a onesize fits all. Join when you need us, pause when you don't. No contracts, no pressure, just practical mentoring that grows with your business."
         />
 
         <Membership />

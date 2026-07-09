@@ -34,10 +34,9 @@ const tiers = [
   {
     name: "Navigate Start",
     price: "£49",
-    description: "Get clear, get started, stop overthinking",
+    description: "Perfect if you're just getting started and want guidance without committing to a full programme.",
     trial: "Start your first month for £29",
     features: [
-      "1-hour Navigate Discovery Session to map out where you are and where you want to go",
       "Monthly business focus topic (marketing, pricing, mindset, etc.)",
       "Access to resource library (templates, guides, worksheets)",
       "Group support and accountability",
@@ -50,10 +49,10 @@ const tiers = [
   {
     name: "Navigate Build",
     price: "£99",
-    description: "Build momentum and start seeing real progress",
+    description: "Best for businesses ready to grow with monthly mentoring workshop and practical support.",
     features: [
       "Everything in Navigate Start",
-      "Monthly group coaching session",
+      "Monthly live mentoring workshop",
       "Business check-in framework",
       "Access to recordings + mini trainings",
       "Priority Q&A support",
@@ -65,14 +64,15 @@ const tiers = [
   {
     name: "Navigate Accelerate",
     price: "£179",
-    description: "Fast-track your growth with personalised support",
+    description: "Dedicated strategic support for established businesses wanting faster growth and accountability.",
     features: [
       "Everything in Navigate Build",
-      "1 × monthly 1:1 session (1 hour)",
-      "Personalised action plan support",
-      "Direct access (voice note / priority messaging)",
+      "Monthly 60 min strategy session",
+      "Personalised action plans",
+      "Priority voice note and email support",
+      "Quarterly business reviews"
     ],
-    cta: "Enquire Now",
+    cta: "Book your strategy call",
     popular: false,
     tierKey: "accelerate",
   },
@@ -109,7 +109,7 @@ export default function Membership() {
           </h2>
 
           <p className="text-(--muted-foreground) max-w-2xl mx-auto text-lg mb-4">
-            Get the support, structure and accountability you need to turn your idea into consistent income.
+            Running a business can feel lonely when you&apos;re carrying everything yourself. This membership gives you support, accountability, practical guidance, and a community that actually gets it.
           </p>
 
           <p className="text-(--muted-foreground) max-w-2xl mx-auto text-base mb-5">
@@ -117,7 +117,7 @@ export default function Membership() {
           </p>
 
           <p className="text-(--foreground) max-w-2xl mx-auto text-base font-semibold italic mb-6">
-            This is where things start to click, and income starts to follow.
+           Because sometimes one good conversation can change the direction of your whole week.
           </p>
 
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-(--primary)/10 border border-(--primary)/30 text-(--primary) font-semibold text-sm">
@@ -145,86 +145,14 @@ export default function Membership() {
       <div className="mb-20">
         <div className="text-center mb-8">
           <h3 className="text-2xl md:text-3xl font-bold text-(--secondary) font-display">
-            Ready to take the first step?
+           Keep the journey going — choose your level
           </h3>
           <p className="text-(--muted-foreground) mt-3 max-w-xl mx-auto">
-            Before you commit to the journey, let&apos;s sit down and map out your route together.
+            Ongoing monthly support. No lock-in contracts. Cancel anytime.
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto rounded-2xl border-2 border-(--primary) bg-(--card) shadow-xl overflow-hidden">
-          <div className="bg-(--primary) text-(--primary-foreground) text-center py-3 text-xs font-semibold tracking-widest uppercase flex items-center justify-center gap-1.5">
-            <Compass className="w-3.5 h-3.5" /> 1:1 With Sarah
-          </div>
-          <div className="p-6 md:p-8">
-            <h4 className="text-xl font-bold text-(--secondary) font-display mb-1">Navigate Kickstart</h4>
-            <p className="text-(--muted-foreground) text-sm mb-5">Your personal roadmap session — because every journey needs a starting point.</p>
-            <div className="flex items-baseline gap-1 mb-6">
-              <span className="text-3xl md:text-4xl font-bold text-(--secondary)">£150</span>
-              <span className="text-(--muted-foreground)">one-off</span>
-            </div>
-            <ul className="space-y-3 mb-8">
-              <li className="flex items-start gap-2.5">
-                <Check className="w-4 h-4 text-(--primary) shrink-0 mt-0.5" />
-                <span className="text-(--secondary)/80 text-sm">1.5-hour initial assessment with Sarah — a deep dive into where you are, where you want to go, and what&apos;s been holding you back</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Check className="w-4 h-4 text-(--primary) shrink-0 mt-0.5" />
-                <span className="text-(--secondary)/80 text-sm">Personalised action plan and next steps — your route mapped out, not just talked about</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Check className="w-4 h-4 text-(--primary) shrink-0 mt-0.5" />
-                <span className="text-(--secondary)/80 text-sm">1-hour follow-up call two weeks later to check your progress, troubleshoot, and keep the momentum going</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Check className="w-4 h-4 text-(--primary) shrink-0 mt-0.5" />
-                <span className="text-(--secondary)/80 text-sm">Ready to keep navigating? Roll into one of our membership tiers below for ongoing support</span>
-              </li>
-            </ul>
-           <Button
-  onClick={async () => {
-    try {
-      const userEmail = prompt("Enter your email to continue");
-
-      if (!userEmail || !userEmail.includes("@")) {
-        alert("Please enter a valid email");
-        return;
-      }
-
-      const res = await fetch("/api/stripe/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "kickstart",
-          userEmail,
-          userName: "Guest",
-        }),
-      });
-
-      const data = await res.json().catch(() => null);
-
-      if (!res.ok) {
-        alert(data?.error || "Failed to create checkout session.");
-        return;
-      }
-
-      if (data?.url) {
-        window.location.href = data.url;
-        return;
-      }
-
-      alert(data?.error || "Failed to create checkout session.");
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong. Please try again.");
-    }
-  }}
->
-  Book Your Kickstart Session <ArrowRight className="w-4 h-4" />
-</Button>
-          </div>
-        </div>
-      </div>
+    
         {/* PRICING */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 items-start">
           {tiers.map((tier) => (
@@ -338,6 +266,116 @@ export default function Membership() {
           ))}
         </div>
 
+  <div className="text-center mb-24 -mt-12 max-w-3xl mx-auto px-4">
+        <p className="text-(--muted-foreground) text-base">
+          Every membership gives you access to the Navigate Business team, practical support, expert guidance and proven frameworks designed to help you move from idea to income.
+        </p>
+      </div>
+ 
+ <div className="mb-20">
+        <div className="text-center mb-8">
+          <h3 className="text-2xl md:text-3xl font-bold text-secondary font-display">
+            Let&apos;s map out your journey together.
+          </h3>
+          <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
+            Before you commit to the journey, let&apos;s sit down and map out your route together.
+          </p>
+        </div>
+  </div>
+    <div className="max-w-2xl mx-auto rounded-2xl border-2 border-(--primary) bg-(--card) shadow-xl overflow-hidden">
+          <div className="bg-(--primary) text-(--primary-foreground) text-center py-3 text-xs font-semibold tracking-widest uppercase flex items-center justify-center gap-1.5">
+            <Compass className="w-3.5 h-3.5" /> Delivered using the Navigate Business Method<sup className="text-[0.6em] align-super">™</sup>
+          </div>
+          <div className="p-6 md:p-8">
+            <h4 className="text-xl font-bold text-(--secondary) font-display mb-1">Navigate Kickstart</h4>
+            <p className="text-(--muted-foreground) text-sm mb-5">Your Business Roadmap Session — because every journey needs a starting point.</p>
+            <div className="flex items-baseline gap-1 mb-6">
+              <span className="text-3xl md:text-4xl font-bold text-(--secondary)">£150</span>
+              <span className="text-(--muted-foreground)">one-off</span>
+            </div>
+            <div className="mb-6">
+              <p className="text-xs font-semibold uppercase tracking-wider text-(--primary) mb-2">Perfect for</p>
+              <ul className="space-y-1.5">
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-(--primary) shrink-0" />
+                  <span className="text-secondary/80 text-sm">New business ideas</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-(--primary) shrink-0" />
+                  <span className="text-secondary/80 text-sm">Side hustles ready to grow</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-(--primary) shrink-0" />
+                  <span className="text-secondary/80 text-sm">Existing businesses needing direction</span>
+                </li>
+              </ul>
+            </div>
+            <ul className="space-y-3 mb-8">
+              <li className="flex items-start gap-2.5">
+                <div className="w-2 h-2 rounded-full bg-(--primary) shrink-0 mt-1.5" />
+                <span className="text-secondary/80 text-sm">Personal Business Health Check</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <div className="w-2 h-2 rounded-full bg-(--primary) shrink-0 mt-1.5" />
+                <span className="text-secondary/80 text-sm">90 Day Action Plan</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <div className="w-2 h-2 rounded-full bg-(--primary) shrink-0 mt-1.5" />
+                <span className="text-secondary/80 text-sm">Priority business goals</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <div className="w-2 h-2 rounded-full bg-(--primary) shrink-0 mt-1.5" />
+                <span className="text-secondary/80 text-sm">Resource recommendations</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <div className="w-2 h-2 rounded-full bg-(--primary) shrink-0 mt-1.5" />
+                <span className="text-secondary/80 text-sm">Follow up accountability check</span>
+              </li>
+            </ul>
+           <Button
+  onClick={async () => {
+    try {
+      const userEmail = prompt("Enter your email to continue");
+
+      if (!userEmail || !userEmail.includes("@")) {
+        alert("Please enter a valid email");
+        return;
+      }
+
+      const res = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "kickstart",
+          userEmail,
+          userName: "Guest",
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        alert(data?.error || "Failed to create checkout session.");
+        return;
+      }
+
+      if (data?.url) {
+        window.location.href = data.url;
+        return;
+      }
+
+      alert(data?.error || "Failed to create checkout session.");
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    }
+  }}
+>
+  Book Your Kickstart Session <ArrowRight className="w-4 h-4" />
+</Button>
+          </div>
+        </div>
+      </div>
         {/* WHO IS IT FOR */}
         <div className="max-w-3xl mx-auto mb-24">
           <h3 className="text-2xl md:text-3xl font-bold text-(--secondary) font-display text-center mb-10">
@@ -366,9 +404,11 @@ export default function Membership() {
           </h3>
 
           <p className="text-(--muted-foreground) text-lg mb-3">
-            With the right support, structure, and someone in your corner — everything becomes clearer, and more achievable.
-          </p>
-
+             With the right support, a clear plan and experienced people in your corner, your next step becomes clearer, more confident and far more achievable.
+        </p>
+        <p className="text-(--muted-foreground) text-sm italic mb-8">
+          Support when you need it. Flexibility when you don&apos;t.
+        </p>
           <Link href="/membership">
             <Button size="lg" className="gap-2">
               Explore Membership <ArrowRight className="w-4 h-4" />
@@ -385,16 +425,47 @@ export default function Membership() {
             </h3>
           </div>
 
-          <p className="text-(--muted-foreground) mb-5 max-w-lg mx-auto">
-            1-day virtual workshops from just £100 — covering everything from start-ups to AI, leadership to content creation.
-          </p>
+         <p className="text-(--muted-foreground) mb-5 max-w-lg mx-auto">
+          Not quite ready for membership? Our practical one day virtual workshops are the perfect place to start. Learn real business skills, leave with a personalised action plan and the confidence to put it into practice straight away.
+        </p>
+        <p className="text-(--foreground) font-semibold mb-6 max-w-lg mx-auto">
+          Workshops from £149.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-(--primary)/10 border border-(--primary)/20">
+            <Check className="w-4 h-4 text-(--primary)" />
+            <span className="text-sm font-medium text-(--secondary)">Practical, hands on learning</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-(--primary)/10 border border-(--primary)/20">
+            <Check className="w-4 h-4 text-(--primary)" />
+            <span className="text-sm font-medium text-(--secondary)">Action plan to take away</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-(--primary)/10 border border-(--primary)/20">
+            <Check className="w-4 h-4 text-(--primary)" />
+            <span className="text-sm font-medium text-(--secondary)">Live workshops delivered by Sarah & the team</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-(--primary)/10 border border-(--primary)/20">
+            <Check className="w-4 h-4 text-(--primary)" />
+            <span className="text-sm font-medium text-(--secondary)">Small groups (maximum 12) for personalised support</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-(--primary)/10 border border-(--primary)/20">
+            <Check className="w-4 h-4 text-(--primary)" />
+            <span className="text-sm font-medium text-(--secondary)">Study from home 9-4</span>
+          </div>
+        </div>
+        <Button size="lg" className="font-semibold gap-2" onClick={() => setWorkshopOpen(true)}>
+          Browse Workshops <ArrowRight className="w-4 h-4" />
+        </Button>
+        <p className="text-(--primary) text-sm mt-6 max-w-lg mx-auto">
+          Need help deciding your route? Book your free 15 minute discovery call and we&apos;ll help you choose the right support for your business. Human insight compliments AI, the Navigate Way.
+        </p>
 
           <Button
             size="lg"
-            className="font-semibold gap-2"
+            className="font-semibold gap-2 mt-4"
             onClick={() => setWorkshopOpen(true)}
           >
-            Register for a Workshop <ArrowRight className="w-4 h-4" />
+            Ignite the Spark — Book a Discovery Call <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
 

@@ -3,21 +3,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import * as Dialog from "@radix-ui/react-dialog";
-import { X, Check, Clock, CalendarDays, Monitor } from "lucide-react";
+import { X, Send, Check, Clock, CalendarDays, Monitor } from "lucide-react";
 
 const workshopTopics = [
-  "Launch Your Business — Start-Up Essentials",
-  "Reimagine & Refresh — For Existing Businesses",
-  "Master Digital Marketing — Get Seen, Get Results",
-  "AI for Business — Work Smarter, Not Harder",
-  "Lead with Confidence — Leadership That Inspires",
-  "Own Your Time — Productivity & Time Management",
-  "Communicate to Connect — Business Communication",
-  "Content Made Simple — Create Without the Stress",
-  "Money Matters — Financial Planning & Budgeting",
-  "Close the Deal — Sales & Negotiation Skills",
-  "Social Media That Works — Strategy & Growth",
-  "Build a Brand People Remember",
+  "The Navigate Start-up Day",
+  "AI for Small Business, Without the Overwhelm",
+  "Stop Overthinking Your Content",
+  "Revive & Thrive",
 ];
 
 export default function WorkshopRegistrationDialog({
@@ -146,26 +138,20 @@ export default function WorkshopRegistrationDialog({
                   </h2>
 
                   <p className="text-sm text-gray-600 mt-1">
-                    1-day virtual workshop — £99.99 per workshop
+                    1-day virtual workshop — invest in yourself and your business.
                   </p>
 
                   <p className="text-xs text-gray-500 mt-1">
-                    ⚡ Limited spaces available per session
+                    ⚡ Small classes — only 12 places available per workshop
                   </p>
                 </div>
 
                 {/* INFO */}
-                <div className="flex gap-4 text-xs text-gray-500 mb-4">
-                  <span className="flex items-center gap-1">
-                    <Monitor className="w-4 h-4" /> Online
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" /> 1 Day
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <CalendarDays className="w-4 h-4" /> Flexible Dates
-                  </span>
-                </div>
+               <div className="flex flex-wrap gap-3 text-sm text-(--muted-foreground) mb-2">
+          <span className="flex items-center gap-1.5"><Monitor className="w-4 h-4 text-(--primary)" /> Virtual / Online</span>
+          <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-(--primary)" /> 9:00 AM – 4:00 PM</span>
+          <span className="flex items-center gap-1.5"><CalendarDays className="w-4 h-4 text-(--primary)" /> 1 Day</span>
+        </div>
 
                 {/* FORM */}
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -199,9 +185,9 @@ export default function WorkshopRegistrationDialog({
 
                   {/* TOPICS */}
                   <div>
-                    <p className="font-medium mb-2">
-                      Select workshop topics
-                    </p>
+                    <label className="block text-sm font-medium text-foreground mb-3">
+              Which workshops are you interested in? <span className="text-muted-foreground font-normal">(select all that apply)</span>
+            </label>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {workshopTopics.map((topic) => {
@@ -233,15 +219,15 @@ export default function WorkshopRegistrationDialog({
                   {/* FOOTER CTA (YOUR REQUESTED DESIGN) */}
                   <p className="text-xs text-muted-foreground mb-3">Once registered, one of our team will be in touch to confirm upcoming dates and secure your place.</p>
           <div className="flex items-center justify-between">
-            <p className="text-lg font-bold text-secondary">£99.99 <span className="text-sm font-normal text-muted-foreground">per workshop</span></p>
+            {/* <p className="text-lg font-bold text-secondary">£99.99 <span className="text-sm font-normal text-muted-foreground">per workshop</span></p> */}
 
                   <div className="flex justify-end">
   <button
     type="submit"
     disabled={loading}
-    className="bg-(--primary) text-white px-6 py-2 rounded-md font-medium hover:opacity-90 transition disabled:opacity-50"
+    className="bg-(--primary) text-white px-6 py-2 inline-flex items-center gap-2 rounded-md font-medium hover:opacity-90 transition disabled:opacity-50"
   >
-    {loading ? "Processing..." : "Register Now"}
+    {loading ? "Processing..." : "Register Now"}  <Send className="w-4 h-4" />
   </button>
 </div>
 

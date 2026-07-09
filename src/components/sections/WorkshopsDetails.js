@@ -20,63 +20,89 @@ import PageHero from "@/components/sections/PageHero";
 import WorkshopRegistrationDialog from "@/components/sections/WorkshopRegistrationDialog";
 
 const iconMap = {
-  "Start-Up in a Day": Sparkles,
-  "AI for Small Business": Cpu,
-  "Content That Converts": MessageSquare,
-  "Leadership for Small Teams": Users,
+  "The Navigate Start-up Day": Sparkles,
+  "AI for Small Business, Without the Overwhelm": Cpu,
+  "Stop Overthinking Your Content": MessageSquare,
+  "Revive & Thrive": Users,
 };
 
 const defaultWorkshops = [
   {
     icon: Sparkles,
-    title: "Start-Up in a Day",
+    title: "The Navigate Start-up Day",
     duration: "1 day · Virtual",
-    price: "£100",
+    price: "£149",
     description:
-      "From idea to launch-ready in a single day. Validate your offer, sort your pricing, and leave with a 90-day plan you can actually execute.",
+      "Build the foundations for a business that's ready to launch, with practical guidance every step of the way.",
     bullets: [
-      "Idea validation framework",
-      "Pricing & positioning",
-      "First customer roadmap",
+      "Validate your business idea",
+      "Choose the right business structure",
+      "Create a simple business plan",
+      "Price with confidence",
+      "Set SMART goals and a 90 day action plan",
+      "Ask questions throughout with live mentoring",
+    ],
+     includes: [
+      "Templates",
+      "Practical resources",
+      "Digital workbook",
     ],
   },
   {
     icon: Cpu,
-    title: "AI for Small Business",
+    title: "AI for Small Business, Without the Overwhelm",
     duration: "1 day · Virtual",
-    price: "£120",
+    price: "£140",
     description:
-      "Stop watching from the sidelines. A practical hands-on day on the AI tools that actually save you hours — without the hype or the jargon.",
+      "Build practical AI skills you can start using immediately. No jargon. No complicated systems. Work smarter not harder.",
     bullets: [
-      "Tools that pay back this week",
-      "Prompts that work",
-      "Build your own AI workflow",
+      "Choose the right AI tools for your business",
+      "Create marketing content in minutes",
+      "Save hours on admin and repetitive tasks",
+      "Build your own AI toolkit with confidence",
+      "Ask questions throughout with live mentoring",
+    ],
+    includes: [
+      "Prompts",
+      "Templates",
+      "Practical resources",
+      "Digital workbook",
     ],
   },
   {
     icon: MessageSquare,
-    title: "Content That Converts",
+    title: "Stop Overthinking Your Content",
     duration: "1 day · Virtual",
     price: "£100",
     description:
-      "A full day on creating content that brings in real enquiries. Built for owners who hate posting on social media.",
+      "Stop guessing what to post. Learn a simple content system that helps you create consistent, engagaing content without spending hours staring at a blank screen.",
     bullets: [
-      "A 30-day content plan",
-      "Hooks that stop the scroll",
-      "Repurpose without burning out",
+     "Build a 30-day content plan in one day",
+      "Create scroll-stopping hooks",
+      "Write captions faster with confidence",
+      "Repurpose content without burning out",
+      "Use AI to speed up content creation",
+      "Leave with templates and your own content workbook",
     ],
   },
   {
     icon: Users,
-    title: "Leadership for Small Teams",
+    title: "Revive & Thrive",
     duration: "1 day · Virtual",
-    price: "£150",
+    price: "£179",
     description:
-      "For owners managing their first 1–10 people. The conversations, structures and standards that take pressure off you.",
+      "Sometimes your business doesn't need another strategy. It needs clarity. Step back, simplify whats no longer working, and rebuild with a clear direction for growth.",
     bullets: [
-      "Hiring without regret",
-      "Hard conversations made easy",
-      "Hold standards without micromanaging",
+     "Identify what's helping your business grow and what's holding it back",
+      "Refresh your business plan and priorities",
+      "Simplify your offers and messaging",
+      "Strengthen your marketing and visibility",
+      "Live mentoring throughout the workshop",
+    ],
+    includes: [
+      "Practical templates",
+      "Planning tools",
+      "Your own digital workbook",
     ],
   },
 ];
@@ -90,6 +116,8 @@ function formatPrice(price) {
   return new Intl.NumberFormat('en-GB', {
     style: 'currency',
     currency: 'GBP',
+      minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(amount / 100)
 }
 
@@ -191,12 +219,30 @@ export default function WorkshopsDetails({ workshops = [] }) {
                         </li>
                       ))}
                     </ul>
+{w.includes?.length > 0 && (
+  <div className="mb-6">
+    <p className="text-sm font-semibold text-(--foreground) mb-3">
+      Includes
+    </p>
 
+    <ul className="space-y-2">
+      {w.includes.map((item) => (
+        <li
+          key={item}
+          className="flex items-start gap-2.5 text-sm text-(--foreground)"
+        >
+          <Check className="w-4 h-4 text-(--primary) shrink-0 mt-0.5" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
                     <button
                       onClick={() => setOpen(true)}
                       className="inline-flex items-center justify-center gap-2 w-full rounded-lg bg-(--foreground) text-(--background) px-6 py-3 text-sm font-semibold hover:bg-(--foreground)/90 transition-colors"
                     >
-                      Register for this workshop
+                      Book your place
                       <ArrowRight size={16} />
                     </button>
                   </motion.div>
@@ -221,24 +267,27 @@ export default function WorkshopsDetails({ workshops = [] }) {
                 </span>
                 .
               </h2>
+                 <p className="text-(--muted-foreground) mt-4 max-w-2xl mx-auto">
+                Every workshop combines practical learning, live mentoring and real business conversations, so you leave with clarity, confidence and an action plan, not just pages of notes. Replay available for 30 days.
+              </p>
             </div>
 
             <div className="grid sm:grid-cols-3 gap-6">
               {[
                 {
                   icon: Calendar,
-                  title: "Half-day or full-day",
-                  desc: "Run live on Zoom. Recording available for 30 days.",
+                  title: "Interactive Learning",
+                  desc: "Live on Zoom with practical exercises, discussion and live mentoring. Replay available for 30 days.",
                 },
                 {
                   icon: Users,
                   title: "Small groups",
-                  desc: "Capped at 12 attendees so nobody hides at the back.",
+                  desc: "Capped at 12 attendees, so everyone gets the chance to ask questions and be heard.",
                 },
                 {
                   icon: GraduationCap,
                   title: "Workbooks included",
-                  desc: "Templates and frameworks you keep and reuse.",
+                  desc: "Leave with practical templates, frameworks and workbooks you will actually use, long after the workshop ends.",
                 },
               ].map(({ icon: Icon, title, desc }, i) => (
                 <motion.div

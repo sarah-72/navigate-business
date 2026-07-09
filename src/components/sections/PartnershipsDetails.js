@@ -118,6 +118,28 @@ export default function PartnershipsDetails({ settings = {} }) {
           </div>
         </section>
 
+ {/* Programme experience strip */}
+      <section className="py-8 bg-(--muted) border-y border-(--border)">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm uppercase tracking-widest text-(--muted-foreground) font-semibold mb-4">
+            Experience Across National Programmes
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            {["DWP Programmes Delivery", "Restart Programme", "Help To Grow Mentor", "Association of Business Mentors", "New Enterprise Allowance"].map((programme) => (
+              <span
+                key={programme}
+                className="inline-flex items-center rounded-full bg-(--card) border border-(--primary) px-4 py-2 text-sm font-medium text-(--foreground) shadow-sm"
+              >
+                {programme}
+              </span>
+            ))}
+          </div>
+          <p className="text-(--muted-foreground) text-sm mt-5 max-w-2xl mx-auto leading-relaxed">
+            Supporting start ups, SMEs and employability programmes through practical enterprise delivery that improves engagement, progression and outcomes.
+          </p>
+        </div>
+      </section>
+
 {/* 2. DELIVERY OUTCOMES */}
 <section className="section-padding bg-(--background)">
   <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -349,17 +371,17 @@ export default function PartnershipsDetails({ settings = {} }) {
               <Mail size={20} className="shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs uppercase tracking-wide opacity-80">Email</p>
-                <p className="font-medium break-all">sarah@navigatebusiness.co.uk</p>
+                <p className="font-medium break-all">hello@navigatebusiness.co.uk</p>
               </div>
             </a>
           </li>
 
           <li>
-            <a href="tel:+447398104144" className="flex items-start gap-3 hover:opacity-80 transition-opacity">
+            <a href="tel:+441615201927" className="flex items-start gap-3 hover:opacity-80 transition-opacity">
               <Phone size={20} className="shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs uppercase tracking-wide opacity-80">Phone</p>
-                <p className="font-medium">07398 104144</p>
+                <p className="font-medium">0161 520 1927</p>
               </div>
             </a>
           </li>
@@ -369,7 +391,7 @@ export default function PartnershipsDetails({ settings = {} }) {
               <MessageCircle size={20} className="shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs uppercase tracking-wide opacity-80">WhatsApp</p>
-                <p className="font-medium">Message us directly</p>
+                <p className="font-medium">Chat with us on WhatsApp — 07398 104144</p>
               </div>
             </a>
           </li>
@@ -385,6 +407,9 @@ export default function PartnershipsDetails({ settings = {} }) {
           </li>
 
         </ul>
+        <p className="text-sm leading-relaxed mt-6 pt-6 border-t border-white/20 opacity-90">
+                We typically respond within one working day and are happy to discuss subcontract opportunities, delivery partnerships and programme support.
+              </p>
       </div>
 
       {/* Discovery call box */}
@@ -395,22 +420,22 @@ export default function PartnershipsDetails({ settings = {} }) {
         </span>
 
         <h3 className="font-bold text-xl text-(--foreground) mb-3">
-          Book a Free Discovery Call
+          Book a Free Delivery Partnership Call
         </h3>
 
         <p className="text-(--muted-foreground) text-sm leading-relaxed mb-3">
-          Not sure where to start? Book a call and let&apos;s figure it out together. No pressure, no hard sell, just a proper conversation.
+         Looking for an experienced delivery partner for your enterprise or employability programme? Let&apos;s discuss your programme, your objectives, and how Navigate Business can support your delivery.
         </p>
 
         <p className="text-(--foreground) font-medium text-sm mb-5">
-          Walk away with clarity, direction, and next steps.
+         Walk away with clarity, next steps, and an honest recommendation on whether we&apos;re the right fit.
         </p>
 
         <a
           href="mailto:sarah@navigatebusiness.co.uk?subject=Discovery%20Call%20Request"
           className="inline-flex items-center justify-center gap-2 w-full rounded-lg bg-(--primary) px-6 py-3.5 text-base font-semibold text-(--primary-foreground) hover:bg-(--mint-dark) transition-colors shadow-md"
         >
-          Book Discovery Call <ArrowRight size={18} />
+           30 minute online meeting no obligation via Teams or Z <ArrowRight size={18} />
         </a>
 
       </div>

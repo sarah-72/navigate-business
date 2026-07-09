@@ -2,7 +2,7 @@
 import Header from "@/components/Header";
 import { motion } from "framer-motion";
 import {
-  Award,
+ Award,
   Users,
   GraduationCap,
   TrendingUp,
@@ -14,6 +14,8 @@ import {
   CheckCircle2,
   Target,
   Compass,
+  Briefcase,
+  Globe,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -363,7 +365,7 @@ export default function DetailedAbout() {
       </section>
 
       {/* 7. WHAT MAKES NAVIGATE DIFFERENT */}
-      <section className="section-padding bg-muted">
+      <section className="section-padding bg-(--muted)">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -412,6 +414,30 @@ export default function DetailedAbout() {
             <p className="text-lg text-(--muted-foreground) leading-relaxed text-center mb-8">
               We support individuals at all stages, from early ideas to growing businesses, as well as organisations delivering enterprise and employability programmes.
             </p>
+
+             {/* Proof points */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-10">
+              <div className="flex flex-col items-center text-center p-5 rounded-xl bg-(--primary)/5 border border-emerald-700/10">
+                <Briefcase size={28} className="text-(--primary) mb-2" />
+                <span className="font-heading text-2xl font-bold text-foreground">1,000+</span>
+                <span className="text-sm text-muted-foreground">businesses supported</span>
+              </div>
+              <div className="flex flex-col items-center text-center p-5 rounded-xl bg-(--primary)/5 border border-emerald-700/10">
+                <Award size={28} className="text-(--primary) mb-2" />
+                <span className="font-heading text-2xl font-bold text-foreground">30+</span>
+                <span className="text-sm text-muted-foreground">years&apos; experience</span>
+              </div>
+              <div className="flex flex-col items-center text-center p-5 rounded-xl bg-(--primary)/5 border border-emerald-700/10">
+                <Globe size={28} className="text-(--primary) mb-2" />
+                <span className="font-heading text-2xl font-bold text-foreground">National</span>
+                <span className="text-sm text-muted-foreground">programme delivery</span>
+              </div>
+              <div className="flex flex-col items-center text-center p-5 rounded-xl bg-(--primary)/5 border border-emerald-700/10">
+                <Users size={28} className="text-(--primary) mb-2" />
+                <span className="font-heading text-2xl font-bold text-foreground">1000s</span>
+                <span className="text-sm text-muted-foreground">of learners engaged</span>
+              </div>
+            </div>
             <ul className="space-y-3 max-w-2xl mx-auto mb-8">
               {whoWeWorkWith.map((item) => (
                 <li key={item} className="flex items-start gap-3 p-4 rounded-xl bg-card border border-[#d4d2d9]">
