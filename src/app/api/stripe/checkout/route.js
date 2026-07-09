@@ -18,10 +18,10 @@ function resolveBaseUrl(request) {
 }
 
 const WORKSHOPS = {
-  'startup-day': { title: 'Start-Up in a Day', price: 10000 },
-  'ai-small-business': { title: 'AI for Small Business', price: 12000 },
-  'content-converts': { title: 'Content That Converts', price: 10000 },
-  'leadership-small-teams': { title: 'Leadership for Small Teams', price: 15000 },
+  'startup-day': { title: 'The Navigate Start-up Day', price: 14900 },
+  'ai-small-business': { title: 'AI for Small Business, Without the Overwhelm', price: 14900 },
+  'content-converts': { title: 'Stop Overthinking Your Content', price: 14900 },
+  'revive-thrive': { title: 'Revive & Thrive', price: 17900 },
 }
 
 function isValidEmail(email) {
