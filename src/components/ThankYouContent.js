@@ -1,26 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { CheckCircle, Calendar, Mail, ArrowRight } from 'lucide-react'
 
 export default function ThankYouContent() {
-  const searchParams = useSearchParams()
-  const sessionId = searchParams.get('session_id')
-  const [registration, setRegistration] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    if (sessionId) {
-      // In a real app, you might fetch registration details from your API
-      // For now, we'll just show a success message
-      setLoading(false)
-    } else {
-      setLoading(false)
-    }
-  }, [sessionId])
+  const loading = false
 
   if (loading) {
     return (
@@ -58,19 +43,19 @@ export default function ThankYouContent() {
           </h1>
 
           <p className="text-xl text-gray-600 mb-8">
-            Thank you for registering for our workshop. We've sent a confirmation email with all the details.
+            Thank you for registering for our workshop. We&apos;ve sent a confirmation email with all the details.
           </p>
 
           {/* What's Next */}
           <div className="bg-white rounded-2xl p-8 shadow-sm mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">What's Next?</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">What&apos;s Next?</h2>
 
             <div className="space-y-4 text-left">
               <div className="flex items-start gap-4">
                 <Mail className="w-6 h-6 text-primary mt-1 shrink-0" />
                 <div>
                   <h3 className="font-semibold text-gray-900">Check Your Email</h3>
-                  <p className="text-gray-600">We've sent workshop details and preparation materials to your inbox.</p>
+                  <p className="text-gray-600">We&apos;ve sent workshop details and preparation materials to your inbox.</p>
                 </div>
               </div>
 
@@ -78,7 +63,7 @@ export default function ThankYouContent() {
                 <Calendar className="w-6 h-6 text-primary mt-1 shrink-0" />
                 <div>
                   <h3 className="font-semibold text-gray-900">Save the Date</h3>
-                  <p className="text-gray-600">Add the workshop date to your calendar. We'll send reminders as the date approaches.</p>
+                  <p className="text-gray-600">Add the workshop date to your calendar. We&apos;ll send reminders as the date approaches.</p>
                 </div>
               </div>
 

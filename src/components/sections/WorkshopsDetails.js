@@ -52,7 +52,7 @@ const defaultWorkshops = [
     icon: Cpu,
     title: "AI for Small Business, Without the Overwhelm",
     duration: "1 day · Virtual",
-    price: "£140",
+    price: "£149",
     description:
       "Build practical AI skills you can start using immediately. No jargon. No complicated systems. Work smarter not harder.",
     bullets: [
@@ -73,7 +73,7 @@ const defaultWorkshops = [
     icon: MessageSquare,
     title: "Stop Overthinking Your Content",
     duration: "1 day · Virtual",
-    price: "£100",
+    price: "£149",
     description:
       "Stop guessing what to post. Learn a simple content system that helps you create consistent, engagaing content without spending hours staring at a blank screen.",
     bullets: [
