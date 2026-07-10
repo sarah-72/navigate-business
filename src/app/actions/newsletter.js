@@ -1,3 +1,4 @@
+'use server';
 import Mailchimp from '@mailchimp/mailchimp_marketing';
 import { Resend } from 'resend';
 
