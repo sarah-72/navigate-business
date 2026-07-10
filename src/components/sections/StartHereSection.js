@@ -63,7 +63,7 @@ export default function StartHereSection() {
             </ul>
 
             <a
-              href="/fresh-start-from-idea-to-income.pdf"
+              href="/navigate-capability-statement.pdf"
               download
               className="inline-flex items-center justify-center gap-2 w-full rounded-lg bg-(--foreground) text-(--background) px-6 py-3 text-sm font-semibold hover:opacity-90 transition-colors"
             >
