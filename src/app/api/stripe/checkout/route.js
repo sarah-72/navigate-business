@@ -24,6 +24,13 @@ const WORKSHOPS = {
   'revive-thrive': { title: 'Revive & Thrive', price: 17900 },
 }
 
+const WORKSHOP_TOPICS_PRICES = {
+  'The Navigate Start-up Day': 14900,
+  'AI for Small Business, Without the Overwhelm': 14900,
+  'Stop Overthinking Your Content': 14900,
+  'Revive & Thrive': 17900,
+}
+
 function isValidEmail(email) {
   return typeof email === 'string' &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -125,21 +132,34 @@ export async function POST(request) {
     // =====================================================
     if (type === 'workshop' || workshopId || workshopSlug) {
       let workshop = null
-      const isGenericWorkshop = type === 'workshop' && !workshopId && !workshopSlug
       let workshopReference = workshopId || workshopSlug || 'generic'
+      let totalPrice = 0
 
       if (workshopSlug) {
         workshop = getWorkshopBySlug(workshopSlug)
+        if (workshop) {
+          totalPrice = workshop.price
+        }
       } else if (workshopId) {
         workshop = WORKSHOPS[workshopId]
-      } else if (isGenericWorkshop) {
-        workshop = {
-          title: 'Workshop registration',
-          price: 9999,
+        if (workshop) {
+          totalPrice = workshop.price
+        }
+      } else if (type === 'workshop' && Array.isArray(selectedTopics) && selectedTopics.length > 0) {
+        // Calculate total price from selected workshop topics
+        totalPrice = selectedTopics.reduce((sum, topic) => {
+          return sum + (WORKSHOP_TOPICS_PRICES[topic] || 0)
+        }, 0)
+
+        if (totalPrice > 0) {
+          workshop = {
+            title: selectedTopics.length === 1 ? selectedTopics[0] : `Workshop Registration (${selectedTopics.length} workshops)`,
+            price: totalPrice,
+          }
         }
       }
 
-      if (!workshop) {
+      if (!workshop || totalPrice <= 0) {
         return NextResponse.json(
           { error: 'Invalid workshop selected' },
           { status: 400 }
@@ -178,7 +198,7 @@ export async function POST(request) {
             quantity: 1,
             price_data: {
               currency: 'gbp',
-              unit_amount: workshop.price,
+              unit_amount: totalPrice,
               product_data: {
                 name: workshop.title,
                 description: `Workshop registration for ${safeName}`,
