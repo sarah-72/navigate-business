@@ -53,7 +53,7 @@ const whoWeWorkWith = [
 ];
 
 export default function PartnershipsDetails({ settings = {} }) {
-  const capabilityStatementUrl = settings.capabilityStatementUrl || '/navigate-capability-statement.pdf'
+  const capabilityStatementUrl = settings.capabilityStatementUrl || '/Navigate-Business-Capability-Statement.pdf'
 
   return (
     <>

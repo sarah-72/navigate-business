@@ -68,7 +68,9 @@ export default function HeroSection() {
             </Link>
 
             <Link
-              href="/webinar"
+              href="https://us05web.zoom.us/j/5812207904?pwd=TnlpakpXUGlpeEN0TGtiU0VvenorUT09&omn=88969306016"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/70 bg-(--secondary-foreground)/5 px-7 py-3.25 text-sm font-semibold text-(--secondary-foreground) hover:bg-(--secondary-foreground) hover:text-(--charcoal) backdrop-blur-sm transition-all"
             >
               <PlayCircle size={16} />
