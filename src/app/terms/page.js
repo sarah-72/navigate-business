@@ -133,7 +133,83 @@ export default function Terms() {
                 </a>.
               </p>
             </section>
+<section>
+  <h2 className="text-xl font-bold text-(--foreground) mt-10 mb-4">
+    Related Documents
+  </h2>
 
+  <p className="mb-6">
+    The following documents form part of our services where applicable. They
+    are available to view and download as PDF files.
+  </p>
+
+  <div className="space-y-4">
+
+    <a
+      href="/client-engagement-letter-terms-of-business-navigate-business.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center justify-between rounded-xl border border-(--border) bg-(--card) p-5 hover:border-(--primary) hover:shadow-sm transition-all"
+    >
+      <div>
+        <h3 className="font-semibold text-(--foreground)">
+          Client Engagement Letter &amp; Terms of Business
+        </h3>
+        <p className="text-sm text-(--muted-foreground) mt-1">
+          Terms governing our business mentoring, coaching and consultancy
+          services.
+        </p>
+      </div>
+
+      <span className="text-(--primary) font-medium whitespace-nowrap">
+        View PDF →
+      </span>
+    </a>
+
+    <a
+      href="/workshop-course-booking-terms-navigate-business.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center justify-between rounded-xl border border-(--border) bg-(--card) p-5 hover:border-(--primary) hover:shadow-sm transition-all"
+    >
+      <div>
+        <h3 className="font-semibold text-(--foreground)">
+          Workshop &amp; Course Booking Terms
+        </h3>
+        <p className="text-sm text-(--muted-foreground) mt-1">
+          Booking, payment, cancellation and attendance terms for workshops,
+          courses and training events.
+        </p>
+      </div>
+
+      <span className="text-(--primary) font-medium whitespace-nowrap">
+        View PDF →
+      </span>
+    </a>
+
+    <a
+      href="/membership-terms-conditions-navigate-business.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center justify-between rounded-xl border border-(--border) bg-(--card) p-5 hover:border-(--primary) hover:shadow-sm transition-all"
+    >
+      <div>
+        <h3 className="font-semibold text-(--foreground)">
+          Membership Terms &amp; Conditions
+        </h3>
+        <p className="text-sm text-(--muted-foreground) mt-1">
+          Terms and conditions relating to Navigate Business membership
+          services and subscriptions.
+        </p>
+      </div>
+
+      <span className="text-(--primary) font-medium whitespace-nowrap">
+        View PDF →
+      </span>
+    </a>
+
+  </div>
+</section>
           </div>
         </div>
         <BackToTop />
