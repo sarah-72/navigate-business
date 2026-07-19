@@ -23,7 +23,7 @@ if (process.env.MAILCHIMP_API_KEY && process.env.MAILCHIMP_SERVER) {
 export async function POST(request) {
   try {
     const body = await request.text()
-    const sig = headers().get('stripe-signature')
+  const sig = (await headers()).get('stripe-signature')
 
     if (!sig) {
       return NextResponse.json(
